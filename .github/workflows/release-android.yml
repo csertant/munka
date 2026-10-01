@@ -1,0 +1,125 @@
+name: release-android
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+  workflow_dispatch:
+    inputs:
+      lane:
+        description: "Release lane"
+        required: true
+        type: choice
+        default: beta
+        options:
+          - beta
+          - production
+      environment_name:
+        description: "GitHub Environment that stores release secrets"
+        required: false
+        default: release
+        type: string
+
+jobs:
+  android-release:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event_name == 'workflow_dispatch' &&
+      inputs.environment_name || 'release' }}
+    env:
+      LANE: ${{ github.event_name == 'workflow_dispatch' && inputs.lane || 'beta' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Install Dart dependencies
+        run: flutter pub get
+
+      - name: Check Android release secrets
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          PLAY_STORE_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_STORE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          for key in ANDROID_KEYSTORE_BASE64 ANDROID_KEYSTORE_PASSWORD ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD PLAY_STORE_SERVICE_ACCOUNT_JSON; do
+            if [ -z "${!key}" ]; then
+              echo "Missing required secret: $key"
+              exit 1
+            fi
+          done
+
+      - name: Prepare Android signing
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          mkdir -p android/app
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/release-keystore.jks
+
+          KEYSTORE_PATH="android/app/release-keystore.jks"
+          STORE_TYPE=""
+          if keytool -list -storetype PKCS12 -keystore "$KEYSTORE_PATH" -storepass "$ANDROID_KEYSTORE_PASSWORD" >/dev/null 2>&1; then
+            STORE_TYPE="PKCS12"
+          elif keytool -list -storetype JKS -keystore "$KEYSTORE_PATH" -storepass "$ANDROID_KEYSTORE_PASSWORD" >/dev/null 2>&1; then
+            STORE_TYPE="JKS"
+          else
+            echo "Could not read keystore with provided password as PKCS12 or JKS"
+            exit 1
+          fi
+
+          if ! keytool -list -storetype "$STORE_TYPE" -keystore "$KEYSTORE_PATH" -storepass "$ANDROID_KEYSTORE_PASSWORD" -alias "$ANDROID_KEY_ALIAS" >/dev/null 2>&1; then
+            echo "Keystore alias not found: $ANDROID_KEY_ALIAS"
+            echo "Available aliases:"
+            keytool -list -storetype "$STORE_TYPE" -keystore "$KEYSTORE_PATH" -storepass "$ANDROID_KEYSTORE_PASSWORD" || true
+            exit 1
+          fi
+
+          cat > android/key.properties <<EOF
+          storeFile=release-keystore.jks
+          storeType=$STORE_TYPE
+          storePassword=$ANDROID_KEYSTORE_PASSWORD
+          keyAlias=$ANDROID_KEY_ALIAS
+          keyPassword=$ANDROID_KEY_PASSWORD
+          EOF
+
+      - name: Prepare Play Store service account
+        env:
+          PLAY_STORE_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_STORE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          mkdir -p android/fastlane
+          cat > android/fastlane/play-store-service-account.json <<EOF
+          $PLAY_STORE_SERVICE_ACCOUNT_JSON
+          EOF
+
+      - name: Build Android app bundle
+        run: flutter build appbundle --release
+
+      - name: Upload Android release with Fastlane
+        env:
+          AAB_PATH: ../build/app/outputs/bundle/release/app-release.aab
+        run: |
+          cd android
+          bundle exec fastlane "$LANE"

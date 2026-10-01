@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "flutter-mvvm-template (dev)",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-t",
+                "lib/main_dev.dart"
+            ]
+        },
+        {
+            "name": "flutter-mvvm-template (staging)",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-t",
+                "lib/main.dart"
+            ]
+        },
+    ]
+}
