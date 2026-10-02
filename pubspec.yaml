@@ -1,5 +1,5 @@
-name: flutter_mvvm_template
-description: "A minimal Flutter MVVM template project."
+name: munka
+description: "timeshit app tu trakk ur wurk."
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 

@@ -1,4 +1,4 @@
-package hu.munkaapp.flutter_mvvm_template
+package hu.munkaapp.munka
 
 import io.flutter.embedding.android.FlutterActivity
 

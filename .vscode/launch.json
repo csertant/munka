@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter-mvvm-template (dev)",
+            "name": "munka (dev)",
             "request": "launch",
             "type": "dart",
             "args": [
@@ -11,7 +11,7 @@
             ]
         },
         {
-            "name": "flutter-mvvm-template (staging)",
+            "name": "munka (staging)",
             "request": "launch",
             "type": "dart",
             "args": [

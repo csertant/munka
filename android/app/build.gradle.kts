@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "hu.munkaapp.flutter_mvvm_template"
+    namespace = "hu.munkaapp.munka"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -14,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "hu.munkaapp.flutter_mvvm_template"
+        applicationId = "hu.munkaapp.munka"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
