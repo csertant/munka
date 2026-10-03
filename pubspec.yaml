@@ -10,6 +10,8 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.8
+  drift: ^2.35.0
+  drift_flutter: ^0.3.1
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -22,11 +24,13 @@ dependencies:
   intl: any
   json_annotation: ^4.12.0
   material_ui: ^1.1.0
+  path_provider: ^2.1.6
   provider: ^6.1.5+1
   shared_preferences: ^2.5.5
 
 dev_dependencies:
   build_runner: ^2.16.1
+  drift_dev: ^2.35.0
   flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
   flutter_test:
@@ -40,12 +44,17 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-  # fonts:
-  #   - family: Times New Roman
-  #     fonts:
-  #       - asset: assets/fonts/TimesNewRoman.ttf
-  #         style: normal
-  #         weight: 400
+  fonts:
+    - family: DotGothic16
+      fonts:
+        - asset: assets/fonts/DotGothic16/DotGothic16-Regular.ttf
+          style: normal
+          weight: 400
+    - family: Oi
+      fonts:
+        - asset: assets/fonts/Oi/Oi-Regular.ttf
+          style: normal
+          weight: 400
 
 # flutter_native_splash:
 #   color: "#F5F5F5"

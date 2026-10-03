@@ -9,31 +9,34 @@ abstract final class AppColors {
   static const Color red = Color(0xFFFF0000);
   static const Color green = Color(0xFF00FF00);
   static const Color blue = Color(0xFF0000FF);
-  static const Color yellow = Color(0xFFFFCC00);
 
   static const lightColorScheme = ColorScheme(
     brightness: Brightness.light,
-    primary: lightGrey,
-    onPrimary: darkGrey,
+    primary: white,
+    onPrimary: red,
     secondary: white,
-    onSecondary: black,
+    onSecondary: green,
+    tertiary: white,
+    onTertiary: blue,
     surface: white,
-    onSurface: black,
-    error: red,
-    onError: white,
+    onSurface: darkGrey,
+    error: darkGrey,
+    onError: lightGrey,
     outline: black,
   );
 
   static const darkColorScheme = ColorScheme(
     brightness: Brightness.dark,
-    primary: darkGrey,
-    onPrimary: lightGrey,
+    primary: black,
+    onPrimary: red,
     secondary: black,
-    onSecondary: white,
+    onSecondary: green,
+    tertiary: black,
+    onTertiary: blue,
     surface: black,
-    onSurface: white,
-    error: red,
-    onError: black,
+    onSurface: lightGrey,
+    error: lightGrey,
+    onError: darkGrey,
     outline: white,
   );
 }

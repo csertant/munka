@@ -6,8 +6,8 @@ var _baseTextStyle = const TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w400,
   fontStyle: FontStyle.normal,
-  // fontFamily: 'Times New Roman',
-  // fontFamilyFallback: ['Times', 'serif'],
+  fontFamily: 'DotGothic16',
+  fontFamilyFallback: ['Arial', 'sans-serif'],
 );
 
 abstract final class AppTheme {
@@ -22,7 +22,7 @@ abstract final class AppTheme {
     headlineMedium: _baseTextStyle.copyWith(color: Colors.deepPurple),
     headlineSmall: _baseTextStyle.copyWith(color: Colors.deepPurple),
 
-    titleLarge: _baseTextStyle.copyWith(fontSize: 24),
+    titleLarge: _baseTextStyle.copyWith(fontSize: 24, fontFamily: 'Oi'),
     titleMedium: _baseTextStyle.copyWith(fontSize: 22),
     titleSmall: _baseTextStyle.copyWith(fontSize: 20),
 
@@ -48,15 +48,15 @@ abstract final class AppTheme {
     brightness: Brightness.light,
     colorScheme: AppColors.lightColorScheme,
     textTheme: _textTheme,
-    // fontFamily: 'Times New Roman',
-    // fontFamilyFallback: const ['Times', 'serif'],
+    fontFamily: 'DotGothic16',
+    fontFamilyFallback: const ['Arial', 'sans-serif'],
   );
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     colorScheme: AppColors.darkColorScheme,
     textTheme: _textTheme,
-    // fontFamily: 'Times New Roman',
-    // fontFamilyFallback: const ['Times', 'serif'],
+    fontFamily: 'DotGothic16',
+    fontFamilyFallback: const ['Arial', 'sans-serif'],
   );
 }
