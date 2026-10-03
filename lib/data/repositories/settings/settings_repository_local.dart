@@ -1,0 +1,100 @@
+import 'dart:async';
+
+import 'package:material_ui/material_ui.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+
+import '../../../domain/models/app_settings.dart';
+import '../../../utils/utils.dart';
+import '../../services/shared_preferences_service/shared_preferences_service.dart';
+import 'settings_repository.dart';
+
+class SettingsRepositoryLocal extends SettingsRepository {
+  SettingsRepositoryLocal({required this._sharedPreferencesService}) {
+    unawaited(load());
+  }
+
+  final SharedPreferencesService _sharedPreferencesService;
+  AppSettings _appSettings = const AppSettings();
+
+  @override
+  AppSettings get appSettings => _appSettings;
+
+  String _versionString = '';
+
+  @override
+  String get versionString => _versionString;
+
+  @override
+  Future<Result<void>> load() async {
+    _versionString = await _getVersionString();
+    final appSettingsResult = await _getAppSettingsOrDefault();
+    switch (appSettingsResult) {
+      case Ok<AppSettings>():
+        _appSettings = appSettingsResult.value;
+        notifyListeners();
+        return const Result.ok(null);
+      case Error<AppSettings>(error: final error):
+        return Result.error(error);
+    }
+  }
+
+  @override
+  Future<Result<void>> updateLanguage({
+    required AppLanguage languageCode,
+  }) async {
+    final loadResult = await load();
+    switch (loadResult) {
+      case Ok<void>():
+        final updatedAppSettings = _appSettings.copyWith(
+          languageCode: languageCode,
+        );
+        final saveResult = await _sharedPreferencesService.saveAppSettings(
+          appSettings: updatedAppSettings,
+        );
+        if (saveResult is Ok<void>) {
+          _appSettings = updatedAppSettings;
+          notifyListeners();
+        }
+        return saveResult;
+      case Error<void>():
+        return loadResult;
+    }
+  }
+
+  @override
+  Future<Result<void>> updateTheme({required ThemeMode theme}) async {
+    final loadResult = await load();
+    switch (loadResult) {
+      case Ok<void>():
+        final updatedAppSettings = _appSettings.copyWith(theme: theme);
+        final saveResult = await _sharedPreferencesService.saveAppSettings(
+          appSettings: updatedAppSettings,
+        );
+        if (saveResult is Ok<void>) {
+          _appSettings = updatedAppSettings;
+          notifyListeners();
+        }
+        return saveResult;
+      case Error<void>():
+        return loadResult;
+    }
+  }
+
+  Future<Result<AppSettings>> _getAppSettingsOrDefault() async {
+    final appSettingsResult = await _sharedPreferencesService.getAppSettings();
+    switch (appSettingsResult) {
+      case Ok<AppSettings>():
+        return appSettingsResult;
+      case Error<AppSettings>(error: final error):
+        if (error is AppError) {
+          return const Result.ok(AppSettings());
+        }
+        return Result.error(error);
+    }
+  }
+
+  Future<String> _getVersionString() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    return '${packageInfo.version}+${packageInfo.buildNumber}';
+  }
+}

@@ -18,7 +18,7 @@ class SharedPreferencesService {
       if (result != null) {
         return Result.ok(AppSettings.fromJson(json.decode(result) as Json));
       }
-      return Result.error(AppError('App settings not found'));
+      return Result.error(DatabaseError('App settings not found'));
     } on Exception catch (e) {
       return Result.error(AppError.fromError(e));
     }

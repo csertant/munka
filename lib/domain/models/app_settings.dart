@@ -14,20 +14,11 @@ enum AppLanguage {
   String toString() => name;
 }
 
-enum AppTheme {
-  @JsonValue('default')
-  defaultTheme;
-
-  @override
-  String toString() => name;
-}
-
 @freezed
 abstract class AppSettings with _$AppSettings {
   const factory AppSettings({
     @Default(AppLanguage.hu) AppLanguage languageCode,
     @Default(ThemeMode.system) ThemeMode themeMode,
-    @Default(AppTheme.defaultTheme) AppTheme theme,
   }) = _AppSettings;
 
   factory AppSettings.fromJson(Json json) => _$AppSettingsFromJson(json);

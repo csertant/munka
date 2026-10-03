@@ -93,6 +93,46 @@ class AppDatabase extends _$AppDatabase {
     );
   }
 
+  // ---- Session management ----
+
+  Future<Session?> getSession() {
+    return select(sessions).getSingleOrNull();
+  }
+
+  Future<void> insertOrUpdateSession({required SessionsCompanion session}) {
+    return into(sessions).insertOnConflictUpdate(session);
+  }
+
+  Future<void> deleteSession() {
+    return delete(sessions).go();
+  }
+
+  // ---- Profile management ----
+
+  Future<List<Profile>> getProfiles() {
+    return select(profiles).get();
+  }
+
+  Future<Profile> getDefaultProfile() {
+    return (select(
+      profiles,
+    )..where((p) => p.isDefault.equals(true))).getSingle();
+  }
+
+  Future<void> insertOrUpdateProfile({required ProfilesCompanion profile}) {
+    return into(profiles).insertOnConflictUpdate(profile);
+  }
+
+  Future<void> deleteProfile({required Id profileId}) {
+    return (delete(profiles)..where((p) => p.id.equals(profileId))).go();
+  }
+
+  Stream<List<Profile>> watchProfiles() {
+    return select(profiles).watch();
+  }
+
+  // ---- TimeEntry management ----
+
   Stream<TimeEntry?> watchActiveEntry() {
     return (select(timeEntries)
           ..where((tbl) => tbl.endedAt.isNull())
@@ -107,15 +147,8 @@ class AppDatabase extends _$AppDatabase {
         .watch();
   }
 
-  Future<Id> startTimer(Id profileId, {String? project, String? notes}) {
-    return into(timeEntries).insert(
-      TimeEntriesCompanion.insert(
-        profileId: profileId,
-        project: Value(project),
-        startedAt: DateTime.now(),
-        notes: Value(notes),
-      ),
-    );
+  Future<Id> startTimer(TimeEntriesCompanion entry) {
+    return into(timeEntries).insert(entry);
   }
 
   Future<void> stopTimer(Id id) {
