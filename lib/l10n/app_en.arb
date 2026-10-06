@@ -1,4 +1,9 @@
 {
     "@@locale": "en",
-    "appTitle": "munka"
+    "appTitle": "munka",
+    "bootstrapLoadErrorTitle": "An error occurred while loading the application.",
+    "bootstrapLoadErrorLabel": "Reload",
+    "navigationLabelStats": "Stats",
+    "navigationLabelControl": "Control",
+    "navigationLabelSettings": "Settings"
 }

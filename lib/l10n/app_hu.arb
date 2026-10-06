@@ -1,4 +1,9 @@
 {
     "@@locale": "hu",
-    "appTitle": "munka"
+    "appTitle": "munka",
+    "bootstrapLoadErrorTitle": "Hiba történt az alkalmazás betöltése közben.",
+    "bootstrapLoadErrorLabel": "Újratöltés",
+    "navigationLabelStats": "Statisztikák",
+    "navigationLabelControl": "Vezérlés",
+    "navigationLabelSettings": "Beállítások"
 }

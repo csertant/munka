@@ -1,0 +1,42 @@
+import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
+
+import '../../../l10n/generated/app_localizations.dart';
+import 'widgets.dart';
+
+class CustomScreen extends StatelessWidget {
+  const CustomScreen({super.key, required this.navigationShell});
+
+  final StatefulNavigationShell navigationShell;
+
+  @override
+  Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    return Scaffold(
+      body: SafeArea(child: navigationShell),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: navigationShell.currentIndex,
+        onDestinationSelected: (int index) {
+          navigationShell.goBranch(
+            index,
+            initialLocation: index == navigationShell.currentIndex,
+          );
+        },
+        destinations: [
+          NavigationDestination(
+            icon: const CustomIcon(iconPath: CustomIcons.stats),
+            label: localizations.navigationLabelStats,
+          ),
+          NavigationDestination(
+            icon: const CustomIcon(iconPath: CustomIcons.control),
+            label: localizations.navigationLabelControl,
+          ),
+          NavigationDestination(
+            icon: const CustomIcon(iconPath: CustomIcons.settings),
+            label: localizations.navigationLabelSettings,
+          ),
+        ],
+      ),
+    );
+  }
+}

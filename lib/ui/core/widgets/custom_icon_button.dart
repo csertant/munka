@@ -1,0 +1,45 @@
+import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
+
+import '../themes/dimensions.dart';
+import 'custom_icon.dart';
+
+enum CustomIconButtonType { normal, redirectInApp }
+
+class CustomIconButton extends StatelessWidget {
+  const CustomIconButton.normal({
+    super.key,
+    required this.iconPath,
+    required this.onTap,
+    this.tooltip,
+    this.enabled = true,
+    this.size = AppDimensions.iconSizeMedium,
+  }) : type = CustomIconButtonType.normal;
+
+  CustomIconButton.redirectInApp({
+    super.key,
+    required this.iconPath,
+    required String route,
+    required BuildContext context,
+    this.tooltip,
+    this.enabled = true,
+    this.size = AppDimensions.iconSizeMedium,
+  }) : type = CustomIconButtonType.redirectInApp,
+       onTap = (() => context.go(route));
+
+  final String iconPath;
+  final VoidCallback onTap;
+  final double size;
+  final String? tooltip;
+  final bool enabled;
+  final CustomIconButtonType type;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: enabled ? onTap : null,
+      icon: CustomIcon(iconPath: iconPath, size: size),
+      tooltip: tooltip,
+    );
+  }
+}
