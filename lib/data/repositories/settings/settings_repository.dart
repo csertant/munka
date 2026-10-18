@@ -12,5 +12,5 @@ abstract class SettingsRepository extends ChangeNotifier {
 
   Future<Result<void>> updateLanguage({required AppLanguage languageCode});
 
-  Future<Result<void>> updateTheme({required ThemeMode theme});
+  Future<Result<void>> updateTheme({required ThemeMode themeMode});
 }

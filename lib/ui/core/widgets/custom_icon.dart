@@ -3,7 +3,11 @@ import 'package:material_ui/material_ui.dart';
 
 import '../themes/dimensions.dart';
 
-abstract class CustomIcons {}
+abstract class CustomIcons {
+  static const String stats = 'assets/icons/stats.svg';
+  static const String control = 'assets/icons/control.svg';
+  static const String settings = 'assets/icons/settings.svg';
+}
 
 class CustomIcon extends StatelessWidget {
   const CustomIcon({

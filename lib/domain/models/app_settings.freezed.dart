@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppSettings {
 
- AppLanguage get languageCode; ThemeMode get themeMode; AppTheme get theme;
+ AppLanguage get languageCode; ThemeMode get themeMode;
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +30,20 @@ $AppSettingsCopyWith<AppSettings> get copyWith => _$AppSettingsCopyWithImpl<AppS
 @override
 bool operator ==(Object other) {
   final _this = this as AppSettings;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettings&&(identical(other.languageCode, _this.languageCode) || other.languageCode == _this.languageCode)&&(identical(other.themeMode, _this.themeMode) || other.themeMode == _this.themeMode)&&(identical(other.theme, _this.theme) || other.theme == _this.theme));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettings&&(identical(other.languageCode, _this.languageCode) || other.languageCode == _this.languageCode)&&(identical(other.themeMode, _this.themeMode) || other.themeMode == _this.themeMode));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as AppSettings;
-  return Object.hash(runtimeType,_this.languageCode,_this.themeMode,_this.theme);
+  return Object.hash(runtimeType,_this.languageCode,_this.themeMode);
 }
 
 @override
 String toString() {
   final _this = this as AppSettings;
-  return 'AppSettings(languageCode: ${_this.languageCode}, themeMode: ${_this.themeMode}, theme: ${_this.theme})';
+  return 'AppSettings(languageCode: ${_this.languageCode}, themeMode: ${_this.themeMode})';
 }
 
 
@@ -54,7 +54,7 @@ abstract mixin class $AppSettingsCopyWith<$Res>  {
   factory $AppSettingsCopyWith(AppSettings value, $Res Function(AppSettings) _then) = _$AppSettingsCopyWithImpl;
 @useResult
 $Res call({
- AppLanguage languageCode, ThemeMode themeMode, AppTheme theme
+ AppLanguage languageCode, ThemeMode themeMode
 });
 
 
@@ -71,12 +71,11 @@ class _$AppSettingsCopyWithImpl<$Res>
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? languageCode = null,Object? themeMode = null,Object? theme = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? languageCode = null,Object? themeMode = null,}) {
   return _then(AppSettings(
 languageCode: null == languageCode ? _self.languageCode : languageCode // ignore: cast_nullable_to_non_nullable
 as AppLanguage,themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
-as ThemeMode,theme: null == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
-as AppTheme,
+as ThemeMode,
   ));
 }
 
@@ -161,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AppLanguage languageCode,  ThemeMode themeMode,  AppTheme theme)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AppLanguage languageCode,  ThemeMode themeMode)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
-return $default(_that.languageCode,_that.themeMode,_that.theme);case _:
+return $default(_that.languageCode,_that.themeMode);case _:
   return orElse();
 
 }
@@ -182,10 +181,10 @@ return $default(_that.languageCode,_that.themeMode,_that.theme);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AppLanguage languageCode,  ThemeMode themeMode,  AppTheme theme)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AppLanguage languageCode,  ThemeMode themeMode)  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings():
-return $default(_that.languageCode,_that.themeMode,_that.theme);case _:
+return $default(_that.languageCode,_that.themeMode);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +201,10 @@ return $default(_that.languageCode,_that.themeMode,_that.theme);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AppLanguage languageCode,  ThemeMode themeMode,  AppTheme theme)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AppLanguage languageCode,  ThemeMode themeMode)?  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
-return $default(_that.languageCode,_that.themeMode,_that.theme);case _:
+return $default(_that.languageCode,_that.themeMode);case _:
   return null;
 
 }
@@ -217,12 +216,11 @@ return $default(_that.languageCode,_that.themeMode,_that.theme);case _:
 @JsonSerializable()
 
 class _AppSettings implements AppSettings {
-  const _AppSettings({this.languageCode = AppLanguage.hu, this.themeMode = ThemeMode.system, this.theme = AppTheme.defaultTheme});
+  const _AppSettings({this.languageCode = AppLanguage.hu, this.themeMode = ThemeMode.system});
   factory _AppSettings.fromJson(Map<String, dynamic> json) => _$AppSettingsFromJson(json);
 
 @override@JsonKey() final  AppLanguage languageCode;
 @override@JsonKey() final  ThemeMode themeMode;
-@override@JsonKey() final  AppTheme theme;
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -237,18 +235,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettings&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.theme, theme) || other.theme == theme));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettings&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,languageCode,themeMode,theme);
+    return Object.hash(runtimeType,languageCode,themeMode);
 }
 
 @override
 String toString() {
-    return 'AppSettings(languageCode: $languageCode, themeMode: $themeMode, theme: $theme)';
+    return 'AppSettings(languageCode: $languageCode, themeMode: $themeMode)';
 }
 
 
@@ -259,7 +257,7 @@ abstract mixin class _$AppSettingsCopyWith<$Res> implements $AppSettingsCopyWith
   factory _$AppSettingsCopyWith(_AppSettings value, $Res Function(_AppSettings) _then) = __$AppSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- AppLanguage languageCode, ThemeMode themeMode, AppTheme theme
+ AppLanguage languageCode, ThemeMode themeMode
 });
 
 
@@ -276,12 +274,11 @@ class __$AppSettingsCopyWithImpl<$Res>
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? languageCode = null,Object? themeMode = null,Object? theme = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? languageCode = null,Object? themeMode = null,}) {
   return _then(_AppSettings(
 languageCode: null == languageCode ? _self.languageCode : languageCode // ignore: cast_nullable_to_non_nullable
 as AppLanguage,themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
-as ThemeMode,theme: null == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
-as AppTheme,
+as ThemeMode,
   ));
 }
 
