@@ -97,17 +97,12 @@ class DatabaseServiceDev implements DatabaseService {
   }
 
   @override
-  Future<Result<Id>> startTimer({required TimeEntriesCompanion entry}) async {
-    return const Result.ok(1);
-  }
-
-  @override
-  Future<Result<void>> stopTimer(Id id) async {
+  Future<Result<void>> saveEntry({required TimeEntriesCompanion entry}) async {
     return const Result.ok(null);
   }
 
   @override
-  Future<Result<void>> deleteEntry(Id id) async {
+  Future<Result<void>> removeEntry({required Id id}) async {
     return const Result.ok(null);
   }
 }

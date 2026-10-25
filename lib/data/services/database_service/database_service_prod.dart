@@ -64,17 +64,12 @@ class DatabaseServiceProd implements DatabaseService {
   }
 
   @override
-  Future<Result<Id>> startTimer({required TimeEntriesCompanion entry}) {
-    return guard(() => _database.startTimer(entry));
+  Future<Result<void>> saveEntry({required TimeEntriesCompanion entry}) {
+    return guardVoid(() => _database.insertOrUpdateEntry(entry: entry));
   }
 
   @override
-  Future<Result<void>> stopTimer(Id id) {
-    return guard(() => _database.stopTimer(id));
-  }
-
-  @override
-  Future<Result<void>> deleteEntry(Id id) {
+  Future<Result<void>> removeEntry({required Id id}) {
     return guard(() => _database.deleteEntry(id));
   }
 }

@@ -14,7 +14,6 @@ abstract class DatabaseService {
 
   Stream<TimeEntry?> watchActiveEntry();
   Stream<List<TimeEntry>> watchRecentEntries();
-  Future<Result<Id>> startTimer({required TimeEntriesCompanion entry});
-  Future<Result<void>> stopTimer(Id id);
-  Future<Result<void>> deleteEntry(Id id);
+  Future<Result<void>> saveEntry({required TimeEntriesCompanion entry});
+  Future<Result<void>> removeEntry({required Id id});
 }

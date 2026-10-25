@@ -147,14 +147,8 @@ class AppDatabase extends _$AppDatabase {
         .watch();
   }
 
-  Future<Id> startTimer(TimeEntriesCompanion entry) {
-    return into(timeEntries).insert(entry);
-  }
-
-  Future<void> stopTimer(Id id) {
-    return (update(timeEntries)..where((tbl) => tbl.id.equals(id))).write(
-      TimeEntriesCompanion(endedAt: Value(DateTime.now())),
-    );
+  Future<void> insertOrUpdateEntry({required TimeEntriesCompanion entry}) {
+    return into(timeEntries).insertOnConflictUpdate(entry);
   }
 
   Future<void> deleteEntry(Id id) {
