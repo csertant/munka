@@ -5,5 +5,7 @@
     "bootstrapLoadErrorLabel": "Reload",
     "navigationLabelStats": "Stats",
     "navigationLabelControl": "Control",
-    "navigationLabelSettings": "Settings"
+    "navigationLabelSettings": "Settings",
+    "controlLoadErrorTitle": "An error occurred while loading the control screen.",
+    "controlLoadErrorLabel": "Reload"
 }

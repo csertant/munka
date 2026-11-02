@@ -133,16 +133,20 @@ class AppDatabase extends _$AppDatabase {
 
   // ---- TimeEntry management ----
 
-  Stream<TimeEntry?> watchActiveEntry() {
+  Stream<TimeEntry?> watchActiveEntry({required Id profileId}) {
     return (select(timeEntries)
-          ..where((tbl) => tbl.endedAt.isNull())
+          ..where(
+            (tbl) => tbl.profileId.equals(profileId) & tbl.endedAt.isNull(),
+          )
           ..limit(1))
         .watchSingleOrNull();
   }
 
-  Stream<List<TimeEntry>> watchRecentEntries() {
+  Stream<List<TimeEntry>> watchRecentEntries({required Id profileId}) {
     return (select(timeEntries)
-          ..where((tbl) => tbl.endedAt.isNotNull())
+          ..where(
+            (tbl) => tbl.profileId.equals(profileId) & tbl.endedAt.isNotNull(),
+          )
           ..orderBy([(tbl) => OrderingTerm.desc(tbl.startedAt)]))
         .watch();
   }

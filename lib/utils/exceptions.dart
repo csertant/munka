@@ -47,3 +47,10 @@ class PlatformError extends AppError {
   @override
   String toString() => 'PlatformError: $message';
 }
+
+class NotFoundError extends AppError {
+  NotFoundError(super.message, {super.cause});
+
+  @override
+  String toString() => 'NotFoundError: $message';
+}

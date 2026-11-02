@@ -5,5 +5,7 @@
     "bootstrapLoadErrorLabel": "Újratöltés",
     "navigationLabelStats": "Statisztikák",
     "navigationLabelControl": "Vezérlés",
-    "navigationLabelSettings": "Beállítások"
+    "navigationLabelSettings": "Beállítások",
+    "controlLoadErrorTitle": "Hiba történt a vezérlőképernyő betöltésekor.",
+    "controlLoadErrorLabel": "Újratöltés"
 }

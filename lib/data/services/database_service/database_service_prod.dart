@@ -54,13 +54,13 @@ class DatabaseServiceProd implements DatabaseService {
   // ---- TimeEntry management ----
 
   @override
-  Stream<TimeEntry?> watchActiveEntry() {
-    return _database.watchActiveEntry();
+  Stream<TimeEntry?> watchActiveEntry({required Id profileId}) {
+    return _database.watchActiveEntry(profileId: profileId);
   }
 
   @override
-  Stream<List<TimeEntry>> watchRecentEntries() {
-    return _database.watchRecentEntries();
+  Stream<List<TimeEntry>> watchRecentEntries({required Id profileId}) {
+    return _database.watchRecentEntries(profileId: profileId);
   }
 
   @override

@@ -2,8 +2,8 @@ import '../../../utils/utils.dart';
 import '../../database/database.dart';
 
 abstract class TimeEntriesRepository {
-  Stream<TimeEntry?> watchActiveEntry();
-  Stream<List<TimeEntry>> watchRecentEntries();
+  Stream<TimeEntry?> watchActiveEntry({required Id profileId});
+  Stream<List<TimeEntry>> watchRecentEntries({required Id profileId});
 
   Future<Result<void>> startTimer({required Id profileId});
 

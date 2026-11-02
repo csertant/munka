@@ -11,13 +11,13 @@ class TimeEntriesRepositoryLocal extends TimeEntriesRepository {
   final DatabaseService _databaseService;
 
   @override
-  Stream<TimeEntry?> watchActiveEntry() {
-    return _databaseService.watchActiveEntry();
+  Stream<TimeEntry?> watchActiveEntry({required Id profileId}) {
+    return _databaseService.watchActiveEntry(profileId: profileId);
   }
 
   @override
-  Stream<List<TimeEntry>> watchRecentEntries() {
-    return _databaseService.watchRecentEntries();
+  Stream<List<TimeEntry>> watchRecentEntries({required Id profileId}) {
+    return _databaseService.watchRecentEntries(profileId: profileId);
   }
 
   @override

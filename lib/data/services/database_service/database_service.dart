@@ -12,8 +12,8 @@ abstract class DatabaseService {
   Future<Result<void>> removeProfile({required Id profileId});
   Stream<List<Profile>> watchProfiles();
 
-  Stream<TimeEntry?> watchActiveEntry();
-  Stream<List<TimeEntry>> watchRecentEntries();
+  Stream<TimeEntry?> watchActiveEntry({required Id profileId});
+  Stream<List<TimeEntry>> watchRecentEntries({required Id profileId});
   Future<Result<void>> saveEntry({required TimeEntriesCompanion entry});
   Future<Result<void>> removeEntry({required Id id});
 }

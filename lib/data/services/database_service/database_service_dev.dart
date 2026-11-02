@@ -87,13 +87,19 @@ class DatabaseServiceDev implements DatabaseService {
   // ---- TimeEntry management ----
 
   @override
-  Stream<TimeEntry?> watchActiveEntry() {
-    return Stream.value(exampleActiveEntry);
+  Stream<TimeEntry?> watchActiveEntry({required Id profileId}) {
+    return Stream.value(
+      exampleActiveEntry.profileId == profileId ? exampleActiveEntry : null,
+    );
   }
 
   @override
-  Stream<List<TimeEntry>> watchRecentEntries() {
-    return Stream.value(exampleRecentEntries);
+  Stream<List<TimeEntry>> watchRecentEntries({required Id profileId}) {
+    return Stream.value(
+      exampleRecentEntries
+          .where((entry) => entry.profileId == profileId)
+          .toList(),
+    );
   }
 
   @override
