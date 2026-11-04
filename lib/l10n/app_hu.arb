@@ -7,5 +7,9 @@
     "navigationLabelControl": "Vezérlés",
     "navigationLabelSettings": "Beállítások",
     "controlLoadErrorTitle": "Hiba történt a vezérlőképernyő betöltésekor.",
-    "controlLoadErrorLabel": "Újratöltés"
+    "controlLoadErrorLabel": "Újratöltés",
+    "settingsLoadErrorTitle": "Hiba történt a beállítások betöltésekor.",
+    "settingsLoadErrorLabel": "Újratöltés",
+    "statsLoadErrorTitle": "Hiba történt a statisztikák betöltésekor.",
+    "statsLoadErrorLabel": "Újratöltés"
 }

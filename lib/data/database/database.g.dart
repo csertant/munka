@@ -1384,10 +1384,11 @@ class $$ProfilesTableTableManager
                   getPrefetchedDataCallback: (items) async {
                     return [
                       if (sessionsRefs)
-                        await $_getPrefetchedData<
+                        await $_getPrefetchedDataByColumns<
                           Profile,
                           $ProfilesTable,
-                          Session
+                          Session,
+                          $SessionsTable
                         >(
                           currentTable: table,
                           referencedTable: $$ProfilesTableReferences
@@ -1398,17 +1399,16 @@ class $$ProfilesTableTableManager
                                 table,
                                 p0,
                               ).sessionsRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.profileId == item.id,
-                              ),
+                          currentColumn: 'id',
+                          referencedColumn: 'profile_id',
                           typedResults: items,
                         ),
                       if (timeEntriesRefs)
-                        await $_getPrefetchedData<
+                        await $_getPrefetchedDataByColumns<
                           Profile,
                           $ProfilesTable,
-                          TimeEntry
+                          TimeEntry,
+                          $TimeEntriesTable
                         >(
                           currentTable: table,
                           referencedTable: $$ProfilesTableReferences
@@ -1419,10 +1419,8 @@ class $$ProfilesTableTableManager
                                 table,
                                 p0,
                               ).timeEntriesRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.profileId == item.id,
-                              ),
+                          currentColumn: 'id',
+                          referencedColumn: 'profile_id',
                           typedResults: items,
                         ),
                     ];

@@ -7,5 +7,9 @@
     "navigationLabelControl": "Control",
     "navigationLabelSettings": "Settings",
     "controlLoadErrorTitle": "An error occurred while loading the control screen.",
-    "controlLoadErrorLabel": "Reload"
+    "controlLoadErrorLabel": "Reload",
+    "settingsLoadErrorTitle": "An error occurred while loading the settings screen.",
+    "settingsLoadErrorLabel": "Reload",
+    "statsLoadErrorTitle": "An error occurred while loading the stats screen.",
+    "statsLoadErrorLabel": "Reload"
 }
