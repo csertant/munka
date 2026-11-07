@@ -26,6 +26,9 @@ abstract final class AppDimensions {
   static const paddingSmall = 8.0;
   static const paddingExtraSmall = 4.0;
 
+  static const borderRadius = 4.0;
+  static const borderWidth = 1.0;
+
   double get iconSizeDefault;
 
   static const AppDimensions mobile = _AppDimensionsMobile();

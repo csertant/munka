@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppSettings {
 
- AppLanguage get languageCode; ThemeMode get themeMode;
+ String get languageCode; ThemeMode get themeMode;
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -54,7 +54,7 @@ abstract mixin class $AppSettingsCopyWith<$Res>  {
   factory $AppSettingsCopyWith(AppSettings value, $Res Function(AppSettings) _then) = _$AppSettingsCopyWithImpl;
 @useResult
 $Res call({
- AppLanguage languageCode, ThemeMode themeMode
+ String languageCode, ThemeMode themeMode
 });
 
 
@@ -74,7 +74,7 @@ class _$AppSettingsCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? languageCode = null,Object? themeMode = null,}) {
   return _then(AppSettings(
 languageCode: null == languageCode ? _self.languageCode : languageCode // ignore: cast_nullable_to_non_nullable
-as AppLanguage,themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
+as String,themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
 as ThemeMode,
   ));
 }
@@ -160,7 +160,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AppLanguage languageCode,  ThemeMode themeMode)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String languageCode,  ThemeMode themeMode)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
 return $default(_that.languageCode,_that.themeMode);case _:
@@ -181,7 +181,7 @@ return $default(_that.languageCode,_that.themeMode);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AppLanguage languageCode,  ThemeMode themeMode)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String languageCode,  ThemeMode themeMode)  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings():
 return $default(_that.languageCode,_that.themeMode);case _:
@@ -201,7 +201,7 @@ return $default(_that.languageCode,_that.themeMode);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AppLanguage languageCode,  ThemeMode themeMode)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String languageCode,  ThemeMode themeMode)?  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
 return $default(_that.languageCode,_that.themeMode);case _:
@@ -219,7 +219,7 @@ class _AppSettings implements AppSettings {
   const _AppSettings({this.languageCode = AppLanguage.hu, this.themeMode = ThemeMode.system});
   factory _AppSettings.fromJson(Map<String, dynamic> json) => _$AppSettingsFromJson(json);
 
-@override@JsonKey() final  AppLanguage languageCode;
+@override@JsonKey() final  String languageCode;
 @override@JsonKey() final  ThemeMode themeMode;
 
 /// Create a copy of AppSettings
@@ -257,7 +257,7 @@ abstract mixin class _$AppSettingsCopyWith<$Res> implements $AppSettingsCopyWith
   factory _$AppSettingsCopyWith(_AppSettings value, $Res Function(_AppSettings) _then) = __$AppSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- AppLanguage languageCode, ThemeMode themeMode
+ String languageCode, ThemeMode themeMode
 });
 
 
@@ -277,7 +277,7 @@ class __$AppSettingsCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? languageCode = null,Object? themeMode = null,}) {
   return _then(_AppSettings(
 languageCode: null == languageCode ? _self.languageCode : languageCode // ignore: cast_nullable_to_non_nullable
-as AppLanguage,themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
+as String,themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
 as ThemeMode,
   ));
 }

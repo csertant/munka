@@ -1,14 +1,31 @@
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:provider/provider.dart';
 
+import 'data/repositories/settings/settings_repository.dart';
 import 'l10n/generated/app_localizations.dart';
 import 'routing/router.dart';
 import 'ui/core/themes/themes.dart';
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
 
   @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  late final GoRouter _router;
+
+  @override
+  void initState() {
+    super.initState();
+    _router = router();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final appSettings = context.watch<SettingsRepository>().appSettings;
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       debugShowCheckedModeBanner: false,
@@ -17,11 +34,11 @@ class App extends StatelessWidget {
         ...GlobalMaterialLocalizations.delegates,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      // locale: Locale(appSettings.languageCode),
+      locale: Locale(appSettings.languageCode),
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      // themeMode: appSettings.theme,
-      routerConfig: router(),
+      themeMode: appSettings.themeMode,
+      routerConfig: _router,
     );
   }
 }

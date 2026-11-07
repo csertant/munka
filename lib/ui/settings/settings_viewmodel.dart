@@ -48,7 +48,7 @@ class SettingsViewModel extends ChangeNotifier {
 
   late Command0<void> load;
   late Command1<void, ThemeMode> updateTheme;
-  late Command1<void, AppLanguage> updateLanguage;
+  late Command1<void, String> updateLanguage;
   late Command2<void, String, String?> createProfile;
   late Command1<void, Profile> modifyProfile;
   late Command1<void, Profile> removeProfile;
@@ -57,7 +57,7 @@ class SettingsViewModel extends ChangeNotifier {
 
   AppSettings get appSettings => _settingsRepository.appSettings;
   ThemeMode get themeMode => appSettings.themeMode;
-  AppLanguage get language => appSettings.languageCode;
+  String get language => appSettings.languageCode;
   Profile get activeProfile => _profiles.firstWhere(
     (profile) => profile.id == _sessionManager.profileId,
   );
@@ -78,7 +78,7 @@ class SettingsViewModel extends ChangeNotifier {
     return _settingsRepository.updateTheme(themeMode: theme);
   }
 
-  Future<Result<void>> _updateLanguage(AppLanguage languageCode) {
+  Future<Result<void>> _updateLanguage(String languageCode) {
     return _settingsRepository.updateLanguage(languageCode: languageCode);
   }
 

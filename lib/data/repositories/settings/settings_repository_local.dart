@@ -39,9 +39,7 @@ class SettingsRepositoryLocal extends SettingsRepository {
   }
 
   @override
-  Future<Result<void>> updateLanguage({
-    required AppLanguage languageCode,
-  }) async {
+  Future<Result<void>> updateLanguage({required String languageCode}) async {
     final loadResult = await load();
     switch (loadResult) {
       case Ok<void>():

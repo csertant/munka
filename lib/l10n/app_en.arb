@@ -12,6 +12,26 @@
     "settingsScreenTitle": "Settings",
     "settingsLoadErrorTitle": "An error occurred while loading the settings screen.",
     "settingsLoadErrorLabel": "Reload",
+    "settingsThemeTitle": "Theme",
+    "settingsThemeSubtitle": "Choose your preferred app theme.",
+    "settingsThemeOptionSystem": "system",
+    "settingsThemeOptionLight": "light",
+    "settingsThemeOptionDark": "dark",
+    "settingsLanguageTitle": "Language",
+    "settingsLanguageSubtitle": "Select your preferred language.",
+    "settingsLanguageOptionHungarian": "hungarian",
+    "settingsLanguageOptionEnglish": "english",
+    "settingsLanguageOptionUnknown": "unknown",
+    "settingsMetadataVersionLabel": "App version: {version}",
+    "@settingsMetadataVersionLabel": {
+        "placeholders": {
+            "version": {
+                "type": "String",
+                "example": "1.0.0+1"
+            }
+        }
+    },
+    "settingsMetadataLegalNotice": "© 2026 nosebite studios. All rights reserved!",
     "statsScreenTitle": "Stats",
     "statsLoadErrorTitle": "An error occurred while loading the stats screen.",
     "statsLoadErrorLabel": "Reload"
