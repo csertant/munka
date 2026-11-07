@@ -1,4 +1,8 @@
-# munka
+<p align="center">
+	<img src="assets/icons/appicon_2x.png" alt="munka logo" width="120" />
+</p>
+
+munka
 
 timeshit app tu trakk ur wurk.
 

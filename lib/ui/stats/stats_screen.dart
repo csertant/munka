@@ -33,6 +33,7 @@ class _StatsScreenState extends State<StatsScreen> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
+      appBar: CustomAppBar(title: localizations.statsScreenTitle),
       body: ListenableBuilder(
         listenable: widget.viewModel.load,
         builder: (context, child) {
@@ -51,7 +52,7 @@ class _StatsScreenState extends State<StatsScreen> {
         child: ListenableBuilder(
           listenable: widget.viewModel,
           builder: (context, child) {
-            return Container();
+            return const Center(child: Text('Stats Screen Content'));
           },
         ),
       ),

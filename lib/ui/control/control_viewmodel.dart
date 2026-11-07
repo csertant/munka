@@ -8,7 +8,10 @@ import '../../data/repositories/timeentries/timeentries_repository.dart';
 import '../../utils/utils.dart';
 
 class ControlViewModel extends ChangeNotifier {
-  ControlViewModel(this._sessionManager, this._timeEntriesRepository) {
+  ControlViewModel({
+    required this._sessionManager,
+    required this._timeEntriesRepository,
+  }) {
     load = Command0(_load);
 
     _sessionManager.addListener(_onSessionChanged);

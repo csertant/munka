@@ -1,15 +1,18 @@
 {
     "@@locale": "hu",
-    "appTitle": "munka",
+    "appTitle": "Múnka",
     "bootstrapLoadErrorTitle": "Hiba történt az alkalmazás betöltése közben.",
     "bootstrapLoadErrorLabel": "Újratöltés",
-    "navigationLabelStats": "Statisztikák",
+    "navigationLabelStats": "Statisztika",
     "navigationLabelControl": "Vezérlés",
     "navigationLabelSettings": "Beállítások",
+    "controlScreenTitle": "Múnka",
     "controlLoadErrorTitle": "Hiba történt a vezérlőképernyő betöltésekor.",
     "controlLoadErrorLabel": "Újratöltés",
+    "settingsScreenTitle": "Beállítások",
     "settingsLoadErrorTitle": "Hiba történt a beállítások betöltésekor.",
     "settingsLoadErrorLabel": "Újratöltés",
+    "statsScreenTitle": "Statisztika",
     "statsLoadErrorTitle": "Hiba történt a statisztikák betöltésekor.",
     "statsLoadErrorLabel": "Újratöltés"
 }

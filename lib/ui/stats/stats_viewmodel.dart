@@ -8,7 +8,10 @@ import '../../data/repositories/timeentries/timeentries_repository.dart';
 import '../../utils/utils.dart';
 
 class StatsViewModel extends ChangeNotifier {
-  StatsViewModel(this._sessionManager, this._timeEntriesRepository) {
+  StatsViewModel({
+    required this._sessionManager,
+    required this._timeEntriesRepository,
+  }) {
     load = Command0(_load);
 
     _sessionManager.addListener(_onSessionChanged);

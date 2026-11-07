@@ -5,8 +5,12 @@ import '../data/database/database.dart';
 import '../data/managers/session/session_manager.dart';
 import '../data/managers/session/session_manager_dev.dart';
 import '../data/managers/session/session_manager_prod.dart';
+import '../data/repositories/profile/profile_repository.dart';
+import '../data/repositories/profile/profile_repository_local.dart';
 import '../data/repositories/settings/settings_repository.dart';
 import '../data/repositories/settings/settings_repository_local.dart';
+import '../data/repositories/timeentries/timeentries_repository.dart';
+import '../data/repositories/timeentries/timeentries_repository_local.dart';
 import '../data/services/database_service/database_service.dart';
 import '../data/services/database_service/database_service_dev.dart';
 import '../data/services/database_service/database_service_prod.dart';
@@ -18,6 +22,16 @@ List<SingleChildWidget> _sharedProviders = [
     create: (context) => SettingsRepositoryLocal(
       sharedPreferencesService: context.read<SharedPreferencesService>(),
     ) as SettingsRepository,
+  ),
+  Provider(
+    create: (context) =>
+        ProfileRepositoryLocal(databaseService: context.read<DatabaseService>())
+            as ProfileRepository,
+  ),
+  Provider(
+    create: (context) => TimeEntriesRepositoryLocal(
+      databaseService: context.read<DatabaseService>(),
+    ) as TimeEntriesRepository,
   ),
 ];
 

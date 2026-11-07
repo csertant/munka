@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import 'colors.dart';
+import 'dimensions.dart';
 
 var _baseTextStyle = const TextStyle(
   fontSize: 16,
@@ -22,7 +23,7 @@ abstract final class AppTheme {
     headlineMedium: _baseTextStyle.copyWith(color: Colors.deepPurple),
     headlineSmall: _baseTextStyle.copyWith(color: Colors.deepPurple),
 
-    titleLarge: _baseTextStyle.copyWith(fontSize: 24, fontFamily: 'Oi'),
+    titleLarge: _baseTextStyle.copyWith(fontSize: 24),
     titleMedium: _baseTextStyle.copyWith(fontSize: 22),
     titleSmall: _baseTextStyle.copyWith(fontSize: 20),
 
@@ -44,12 +45,26 @@ abstract final class AppTheme {
     ),
   );
 
+  static final _lightNavigationBarTheme = NavigationBarThemeData(
+    height: AppDimensions.navigationBarHeight,
+    backgroundColor: AppColors.lightColorScheme.surface,
+    indicatorColor: AppColors.lightColorScheme.primary,
+    labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+  );
+  static final _darkNavigationBarTheme = NavigationBarThemeData(
+    height: AppDimensions.navigationBarHeight,
+    backgroundColor: AppColors.darkColorScheme.surface,
+    indicatorColor: AppColors.darkColorScheme.primary,
+    labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+  );
+
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     colorScheme: AppColors.lightColorScheme,
     textTheme: _textTheme,
     fontFamily: 'DotGothic16',
     fontFamilyFallback: const ['Arial', 'sans-serif'],
+    navigationBarTheme: _lightNavigationBarTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -58,5 +73,6 @@ abstract final class AppTheme {
     textTheme: _textTheme,
     fontFamily: 'DotGothic16',
     fontFamilyFallback: const ['Arial', 'sans-serif'],
+    navigationBarTheme: _darkNavigationBarTheme,
   );
 }

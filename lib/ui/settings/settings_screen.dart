@@ -1,7 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/generated/app_localizations.dart';
-import '../core/widgets/widgets.dart' show ErrorIndicator;
+import '../core/widgets/widgets.dart' show CustomAppBar, ErrorIndicator;
 import 'settings_viewmodel.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -33,6 +33,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
+      appBar: CustomAppBar(title: localizations.settingsScreenTitle),
       body: ListenableBuilder(
         listenable: widget.viewModel.load,
         builder: (context, child) {
@@ -51,7 +52,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: ListenableBuilder(
           listenable: widget.viewModel,
           builder: (context, child) {
-            return Container();
+            return const Center(child: Text('Settings Screen Content'));
           },
         ),
       ),

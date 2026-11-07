@@ -33,6 +33,7 @@ class _ControlScreenState extends State<ControlScreen> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
+      appBar: CustomAppBar(title: localizations.controlScreenTitle),
       body: ListenableBuilder(
         listenable: widget.viewModel.load,
         builder: (context, child) {
@@ -51,7 +52,7 @@ class _ControlScreenState extends State<ControlScreen> {
         child: ListenableBuilder(
           listenable: widget.viewModel,
           builder: (context, child) {
-            return Container();
+            return const Center(child: Text('Control Screen Content'));
           },
         ),
       ),

@@ -53,11 +53,6 @@ flutter:
         - asset: assets/fonts/DotGothic16/DotGothic16-Regular.ttf
           style: normal
           weight: 400
-    - family: Oi
-      fonts:
-        - asset: assets/fonts/Oi/Oi-Regular.ttf
-          style: normal
-          weight: 400
 
 flutter_native_splash:
   color: "#F5F5F5"

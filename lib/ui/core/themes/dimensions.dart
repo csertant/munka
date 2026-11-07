@@ -14,6 +14,9 @@ abstract final class AppDimensions {
   static const tabletMaxWidth = 840.0;
   static const mobileMaxWidth = 600.0;
 
+  static const appBarHeight = 56.0;
+  static const navigationBarHeight = 72.0;
+
   static const iconSizeLarge = 28.0;
   static const iconSizeMedium = 24.0;
   static const iconSizeSmall = 20.0;
