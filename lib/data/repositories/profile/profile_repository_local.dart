@@ -39,6 +39,11 @@ class ProfileRepositoryLocal implements ProfileRepository {
   }
 
   @override
+  Future<Result<Profile>> getProfileById(Id profileId) {
+    return _databaseService.getProfileById(profileId: profileId);
+  }
+
+  @override
   Stream<List<Profile>> watchProfiles() {
     return _databaseService.watchProfiles();
   }

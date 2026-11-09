@@ -10,6 +10,8 @@ import '../ui/control/control_viewmodel.dart';
 import '../ui/core/widgets/widgets.dart';
 import '../ui/settings/settings_screen.dart';
 import '../ui/settings/settings_viewmodel.dart';
+import '../ui/settings_profiles/settings_profiles_screen.dart';
+import '../ui/settings_profiles/settings_profiles_viewmodel.dart';
 import '../ui/stats/stats_screen.dart';
 import '../ui/stats/stats_viewmodel.dart';
 import 'routes.dart';
@@ -63,6 +65,28 @@ GoRouter router() => GoRouter(
                 );
                 return SettingsScreen(viewModel: viewModel);
               },
+              routes: [
+                GoRoute(
+                  path: Routes.settingsProfileEditSegment(':id'),
+                  builder: (context, state) {
+                    final profileId = state.pathParameters['id']!;
+                    final viewModel = SettingsProfilesViewModel(
+                      profileRepository: context.read<ProfileRepository>(),
+                      profileId: int.tryParse(profileId),
+                    );
+                    return SettingsProfilesScreen(viewModel: viewModel);
+                  },
+                ),
+                GoRoute(
+                  path: Routes.settingsProfileNewSegment,
+                  builder: (context, state) {
+                    final viewModel = SettingsProfilesViewModel(
+                      profileRepository: context.read<ProfileRepository>(),
+                    );
+                    return SettingsProfilesScreen(viewModel: viewModel);
+                  },
+                ),
+              ],
             ),
           ],
         ),

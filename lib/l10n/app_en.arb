@@ -10,6 +10,14 @@
     "controlLoadErrorTitle": "An error occurred while loading the control screen.",
     "controlLoadErrorLabel": "Reload",
     "settingsScreenTitle": "Settings",
+    "settingsProfileNoDescription": "This profile has no description yet.",
+    "settingsProfileNewProfile": "Create new profile",
+    "settingsProfileCreated": "Profile created.",
+    "errorWhileCreatingProfile": "An error occurred while creating the profile.",
+    "settingsProfileModified": "Profile modified.",
+    "errorWhileModifyingProfile": "An error occurred while modifying the profile.",
+    "settingsProfileRemoved": "Profile removed.",
+    "errorWhileRemovingProfile": "An error occurred while removing the profile.",
     "settingsLoadErrorTitle": "An error occurred while loading the settings screen.",
     "settingsLoadErrorLabel": "Reload",
     "settingsThemeTitle": "Theme",
@@ -34,5 +42,6 @@
     "settingsMetadataLegalNotice": "© 2026 nosebite studios. All rights reserved!",
     "statsScreenTitle": "Stats",
     "statsLoadErrorTitle": "An error occurred while loading the stats screen.",
-    "statsLoadErrorLabel": "Reload"
+    "statsLoadErrorLabel": "Reload",
+    "buttonLabelOk": "Ok"
 }

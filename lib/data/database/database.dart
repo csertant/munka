@@ -113,6 +113,12 @@ class AppDatabase extends _$AppDatabase {
     return select(profiles).get();
   }
 
+  Future<Profile?> getProfileById({required Id profileId}) {
+    return (select(
+      profiles,
+    )..where((p) => p.id.equals(profileId))).getSingleOrNull();
+  }
+
   Future<Profile> getDefaultProfile() {
     return (select(
       profiles,

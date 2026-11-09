@@ -46,6 +46,54 @@ abstract class CustomIcons {
   static const String x = 'assets/icons/letters/x.svg';
   static const String y = 'assets/icons/letters/y.svg';
   static const String z = 'assets/icons/letters/z.svg';
+
+  static const Map<String, String> _letterIcons = {
+    'a': a,
+    'b': b,
+    'c': c,
+    'd': d,
+    'e': e,
+    'f': f,
+    'g': g,
+    'h': h,
+    'i': i,
+    'j': j,
+    'k': k,
+    'l': l,
+    'm': m,
+    'n': n,
+    'o': o,
+    'p': p,
+    'q': q,
+    'r': r,
+    's': s,
+    't': t,
+    'u': u,
+    'v': v,
+    'w': w,
+    'x': x,
+    'y': y,
+    'z': z,
+    'á': a,
+    'ä': a,
+    'é': e,
+    'í': i,
+    'ó': o,
+    'ö': o,
+    'ő': o,
+    'ú': u,
+    'ü': u,
+    'ű': u,
+  };
+
+  static String fromName(String name) {
+    final trimmed = name.trim();
+    if (trimmed.isEmpty) {
+      return user;
+    }
+    final firstChar = trimmed.characters.first.toLowerCase();
+    return _letterIcons[firstChar] ?? user;
+  }
 }
 
 class CustomIcon extends StatelessWidget {

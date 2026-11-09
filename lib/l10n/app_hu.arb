@@ -10,6 +10,14 @@
     "controlLoadErrorTitle": "Hiba történt a vezérlőképernyő betöltésekor.",
     "controlLoadErrorLabel": "Újratöltés",
     "settingsScreenTitle": "Beállítások",
+    "settingsProfileNoDescription": "Ehhez a profilhoz még nincs leírás.",
+    "settingsProfileNewProfile": "Új profil létrehozása",
+    "settingsProfileCreated": "Profil létrehozva.",
+    "errorWhileCreatingProfile": "Hiba történt a profil létrehozásakor.",
+    "settingsProfileModified": "Profil módosítva.",
+    "errorWhileModifyingProfile": "Hiba történt a profil módosításakor.",
+    "settingsProfileRemoved": "Profil eltávolítva.",
+    "errorWhileRemovingProfile": "Hiba történt a profil eltávolításakor.",
     "settingsLoadErrorTitle": "Hiba történt a beállítások betöltésekor.",
     "settingsLoadErrorLabel": "Újratöltés",
     "settingsThemeTitle": "Téma",
@@ -34,5 +42,6 @@
     "settingsMetadataLegalNotice": "© 2026 nosebite studios. Minden jog fenntartva!",
     "statsScreenTitle": "Statisztika",
     "statsLoadErrorTitle": "Hiba történt a statisztikák betöltésekor.",
-    "statsLoadErrorLabel": "Újratöltés"
+    "statsLoadErrorLabel": "Újratöltés",
+    "buttonLabelOk": "Ok"
 }

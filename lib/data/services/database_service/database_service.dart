@@ -7,6 +7,7 @@ abstract class DatabaseService {
   Future<Result<void>> removeSession();
 
   Future<Result<List<Profile>>> getProfiles();
+  Future<Result<Profile>> getProfileById({required Id profileId});
   Future<Result<Profile>> getDefaultProfile();
   Future<Result<void>> saveProfile({required ProfilesCompanion profile});
   Future<Result<void>> removeProfile({required Id profileId});

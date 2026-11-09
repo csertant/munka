@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:drift/drift.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../data/database/database.dart';
@@ -22,8 +21,6 @@ class SettingsViewModel extends ChangeNotifier {
     load = Command0(_load);
     updateTheme = Command1(_updateTheme);
     updateLanguage = Command1(_updateLanguage);
-    createProfile = Command2(_createProfile);
-    modifyProfile = Command1(_modifyProfile);
     removeProfile = Command1(_removeProfile);
     switchProfile = Command1(_switchProfile);
 
@@ -49,11 +46,8 @@ class SettingsViewModel extends ChangeNotifier {
   late Command0<void> load;
   late Command1<void, ThemeMode> updateTheme;
   late Command1<void, String> updateLanguage;
-  late Command2<void, String, String?> createProfile;
-  late Command1<void, Profile> modifyProfile;
   late Command1<void, Profile> removeProfile;
   late Command1<void, Profile> switchProfile;
-  late Command3<void, bool, bool, DateTime?> removeArticles;
 
   AppSettings get appSettings => _settingsRepository.appSettings;
   ThemeMode get themeMode => appSettings.themeMode;
@@ -82,32 +76,8 @@ class SettingsViewModel extends ChangeNotifier {
     return _settingsRepository.updateLanguage(languageCode: languageCode);
   }
 
-  Future<Result<void>> _createProfile(String name, String? description) {
-    try {
-      return _profileRepository.saveProfile(
-        name: name.trim(),
-        description: description?.trim(),
-      );
-    } finally {
-      notifyListeners();
-    }
-  }
-
   Future<Result<void>> _switchProfile(Profile profile) {
     return _sessionManager.initializeSession(profileId: profile.id);
-  }
-
-  Future<Result<void>> _modifyProfile(Profile profile) {
-    try {
-      return _profileRepository.modifyProfile(
-        profile: profile.copyWith(
-          name: profile.name.trim(),
-          description: Value(profile.description?.trim()),
-        ),
-      );
-    } finally {
-      notifyListeners();
-    }
   }
 
   Future<Result<void>> _removeProfile(Profile profile) async {

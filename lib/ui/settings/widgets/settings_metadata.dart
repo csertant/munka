@@ -13,7 +13,7 @@ class SettingsMetadata extends StatelessWidget {
     final theme = Theme.of(context);
     final localizations = AppLocalizations.of(context)!;
     return Padding(
-      padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+      padding: const EdgeInsets.all(AppDimensions.paddingSmall),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

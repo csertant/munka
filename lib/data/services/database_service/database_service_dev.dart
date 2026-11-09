@@ -65,6 +65,17 @@ class DatabaseServiceDev implements DatabaseService {
   }
 
   @override
+  Future<Result<Profile>> getProfileById({required Id profileId}) async {
+    if (profileId == defaultProfile.id) {
+      return Result.ok(defaultProfile);
+    } else if (profileId == otherProfile.id) {
+      return Result.ok(otherProfile);
+    } else {
+      return Result.error(DatabaseError('Profile not found'));
+    }
+  }
+
+  @override
   Future<Result<Profile>> getDefaultProfile() async {
     return Result.ok(defaultProfile);
   }

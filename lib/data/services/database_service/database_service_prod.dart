@@ -32,6 +32,11 @@ class DatabaseServiceProd implements DatabaseService {
   }
 
   @override
+  Future<Result<Profile>> getProfileById({required Id profileId}) {
+    return guardNotNull(() => _database.getProfileById(profileId: profileId));
+  }
+
+  @override
   Future<Result<Profile>> getDefaultProfile() {
     return guard(_database.getDefaultProfile);
   }
