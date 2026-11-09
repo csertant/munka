@@ -45,6 +45,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/icons/
+    - assets/icons/letters/
     - assets/images/
   fonts:
     - family: DotGothic16

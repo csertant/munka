@@ -4,7 +4,7 @@ import 'colors.dart';
 import 'dimensions.dart';
 
 var _baseTextStyle = const TextStyle(
-  fontSize: 16,
+  fontSize: 12,
   fontWeight: FontWeight.w400,
   fontStyle: FontStyle.normal,
   fontFamily: 'DotGothic16',
@@ -23,24 +23,24 @@ abstract final class AppTheme {
     headlineMedium: _baseTextStyle.copyWith(color: Colors.deepPurple),
     headlineSmall: _baseTextStyle.copyWith(color: Colors.deepPurple),
 
-    titleLarge: _baseTextStyle.copyWith(fontSize: 24),
-    titleMedium: _baseTextStyle.copyWith(fontSize: 22),
-    titleSmall: _baseTextStyle.copyWith(fontSize: 20),
+    titleLarge: _baseTextStyle.copyWith(fontSize: 20),
+    titleMedium: _baseTextStyle.copyWith(fontSize: 18),
+    titleSmall: _baseTextStyle.copyWith(fontSize: 16),
 
-    bodyLarge: _baseTextStyle.copyWith(fontSize: 18),
+    bodyLarge: _baseTextStyle.copyWith(fontSize: 14),
     bodyMedium: _baseTextStyle,
-    bodySmall: _baseTextStyle.copyWith(fontSize: 14),
+    bodySmall: _baseTextStyle.copyWith(fontSize: 10),
 
     labelLarge: _baseTextStyle.copyWith(
-      fontSize: 16,
+      fontSize: 12,
       fontStyle: FontStyle.italic,
     ),
     labelMedium: _baseTextStyle.copyWith(
-      fontSize: 14,
+      fontSize: 10,
       fontStyle: FontStyle.italic,
     ),
     labelSmall: _baseTextStyle.copyWith(
-      fontSize: 12,
+      fontSize: 8,
       fontStyle: FontStyle.italic,
     ),
   );
@@ -48,13 +48,13 @@ abstract final class AppTheme {
   static final _lightNavigationBarTheme = NavigationBarThemeData(
     height: AppDimensions.navigationBarHeight,
     backgroundColor: AppColors.lightColorScheme.surface,
-    indicatorColor: AppColors.lightColorScheme.primary,
+    indicatorColor: AppColors.lightColorScheme.shadow,
     labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
   );
   static final _darkNavigationBarTheme = NavigationBarThemeData(
     height: AppDimensions.navigationBarHeight,
     backgroundColor: AppColors.darkColorScheme.surface,
-    indicatorColor: AppColors.darkColorScheme.primary,
+    indicatorColor: AppColors.darkColorScheme.shadow,
     labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
   );
 
@@ -73,11 +73,12 @@ abstract final class AppTheme {
       );
 
   static final RadioThemeData _radioTheme = RadioThemeData(
-    fillColor: WidgetStateProperty.resolveWith(
-      (states) => states.contains(WidgetState.selected)
-          ? AppColors.lightColorScheme.onPrimary
-          : AppColors.lightColorScheme.onSurface,
-    ),
+    fillColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
+        return AppColors.lightColorScheme.onPrimary;
+      }
+      return null;
+    }),
   );
 
   static ThemeData lightTheme = ThemeData(

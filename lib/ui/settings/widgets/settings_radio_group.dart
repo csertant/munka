@@ -27,13 +27,16 @@ class SettingsRadioGroup<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: const EdgeInsets.all(AppDimensions.paddingSmall),
-      margin: const EdgeInsets.symmetric(
-        horizontal: AppDimensions.paddingSmall,
+      padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+      margin: const EdgeInsets.fromLTRB(
+        AppDimensions.paddingMedium,
+        0,
+        AppDimensions.paddingMedium,
+        AppDimensions.paddingMedium,
       ),
       decoration: BoxDecoration(
         border: Border.all(color: theme.colorScheme.outline),
-        borderRadius: BorderRadius.circular(AppDimensions.borderRadius),
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
       ),
       child: RadioGroup<T>(
         onChanged: onChanged,
@@ -48,6 +51,11 @@ class SettingsRadioGroup<T> extends StatelessWidget {
             ...options.map(
               (option) => RadioListTile<T>(
                 contentPadding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    AppDimensions.borderRadiusMedium,
+                  ),
+                ),
                 value: option,
                 title: Text(optionLabels[options.indexOf(option)]),
               ),

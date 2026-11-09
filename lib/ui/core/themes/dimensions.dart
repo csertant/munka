@@ -17,19 +17,30 @@ abstract final class AppDimensions {
   static const appBarHeight = 56.0;
   static const navigationBarHeight = 72.0;
 
-  static const iconSizeLarge = 28.0;
-  static const iconSizeMedium = 24.0;
-  static const iconSizeSmall = 20.0;
+  static const iconSizeLarge = 25.0;
+  static const iconSizeMedium = 20.0;
+  static const iconSizeSmall = 15.0;
 
-  static const paddingLarge = 32.0;
-  static const paddingMedium = 16.0;
-  static const paddingSmall = 8.0;
-  static const paddingExtraSmall = 4.0;
+  static const avatarSizeExtraLarge = 150.0;
+  static const avatarSizeLarge = 100.0;
+  static const avatarSizeMedium = 50.0;
+  static const avatarSizeSmall = 30.0;
 
-  static const borderRadius = 4.0;
+  static const paddingExtraLarge = 30.0;
+  static const paddingLarge = 20.0;
+  static const paddingMedium = 10.0;
+  static const paddingSmall = 5.0;
+  static const paddingExtraSmall = 2.5;
+
+  static const borderRadiusFull = 999.0;
+  static const borderRadiusLarge = 20.0;
+  static const borderRadiusMedium = 10.0;
+  static const borderRadiusSmall = 5.0;
+
   static const borderWidth = 1.0;
 
   double get iconSizeDefault;
+  double get avatarSizeDefault;
 
   static const AppDimensions mobile = _AppDimensionsMobile();
   static const AppDimensions tablet = _AppDimensionsTablet();
@@ -42,6 +53,9 @@ final class _AppDimensionsMobile extends AppDimensions {
 
   @override
   double get iconSizeDefault => AppDimensions.iconSizeMedium;
+
+  @override
+  double get avatarSizeDefault => AppDimensions.avatarSizeLarge;
 }
 
 /// Tablet dimensions
@@ -50,6 +64,9 @@ final class _AppDimensionsTablet extends AppDimensions {
 
   @override
   double get iconSizeDefault => AppDimensions.iconSizeLarge;
+
+  @override
+  double get avatarSizeDefault => AppDimensions.avatarSizeLarge;
 }
 
 /// Desktop dimensions
@@ -58,4 +75,7 @@ final class _AppDimensionsDesktop extends AppDimensions {
 
   @override
   double get iconSizeDefault => AppDimensions.iconSizeLarge;
+
+  @override
+  double get avatarSizeDefault => AppDimensions.avatarSizeExtraLarge;
 }

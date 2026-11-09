@@ -15,13 +15,13 @@ class CustomSnackBar {
       content: Text(
         content,
         style: theme.textTheme.bodyMedium!.copyWith(
-          color: theme.colorScheme.outline,
+          color: theme.colorScheme.outlineVariant,
         ),
       ),
-      backgroundColor: theme.colorScheme.onSurface,
+      backgroundColor: theme.colorScheme.shadow,
       action: SnackBarAction(
         label: AppLocalizations.of(context)!.buttonLabelOk,
-        textColor: theme.colorScheme.outline,
+        textColor: theme.colorScheme.outlineVariant,
         onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
       ),
     );

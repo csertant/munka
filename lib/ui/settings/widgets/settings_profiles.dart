@@ -24,32 +24,28 @@ class SettingsProfiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
     final otherProfiles = profiles
         .where((profile) => profile != selectedProfile)
         .toList();
-    return Column(
-      children: [
-        _buildActiveProfile(context, selectedProfile),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: otherProfiles.length,
-          itemBuilder: (context, index) {
-            final profile = otherProfiles[index];
-            return _buildOtherProfile(context, profile);
-          },
-        ),
-        InkWell(
-          onTap: onNewProfile,
-          child: Row(
-            children: [
-              const CustomIcon(iconPath: CustomIcons.add),
-              Expanded(child: Text(localizations.settingsProfileNewProfile)),
-            ],
+    return Padding(
+      padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+      child: Column(
+        children: [
+          const SizedBox(height: AppDimensions.paddingLarge),
+          _buildActiveProfile(context, selectedProfile),
+          const SizedBox(height: AppDimensions.paddingExtraLarge),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: otherProfiles.length,
+            itemBuilder: (context, index) {
+              final profile = otherProfiles[index];
+              return _buildOtherProfile(context, profile, index);
+            },
           ),
-        ),
-      ],
+          _buildNewProfileButton(context, otherProfiles.isNotEmpty),
+        ],
+      ),
     );
   }
 
@@ -61,11 +57,12 @@ class SettingsProfiles extends StatelessWidget {
           child: Column(
             children: [
               CustomCircleAvatar(iconPath: CustomIcons.fromName(profile.name)),
-              Text(profile.name, style: theme.textTheme.titleMedium),
+              const SizedBox(height: AppDimensions.paddingMedium),
+              Text(profile.name, style: theme.textTheme.titleLarge),
               Text(
                 profile.description ??
                     AppLocalizations.of(context)!.settingsProfileNoDescription,
-                style: theme.textTheme.bodyMedium,
+                style: theme.textTheme.bodyLarge,
               ),
             ],
           ),
@@ -77,29 +74,105 @@ class SettingsProfiles extends StatelessWidget {
             context: context,
             iconPath: CustomIcons.edit,
             route: Routes.settingsProfileEdit(selectedProfile.id.toString()),
-            size: AppDimensions.iconSizeSmall,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildOtherProfile(BuildContext context, Profile profile) {
+  Widget _buildOtherProfile(BuildContext context, Profile profile, int index) {
     final theme = Theme.of(context);
-    return InkWell(
-      onTap: () => onSwitchProfile(profile),
-      child: Row(
-        children: [
-          CustomCircleAvatar(iconPath: CustomIcons.fromName(profile.name)),
-          Expanded(
-            child: Text(profile.name, style: theme.textTheme.bodyMedium),
+    final borderRadiusForOtherProfile = _buildBorderRadiusForOtherProfile(
+      index == 0,
+    );
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).colorScheme.outline),
+        borderRadius: borderRadiusForOtherProfile,
+      ),
+      child: InkWell(
+        onTap: () => onSwitchProfile(profile),
+        borderRadius: borderRadiusForOtherProfile,
+        child: Padding(
+          padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+          child: Row(
+            children: [
+              CustomCircleAvatar(
+                iconPath: CustomIcons.fromName(profile.name),
+                padding: const EdgeInsets.all(AppDimensions.paddingSmall),
+                size: AppDimensions.avatarSizeSmall,
+              ),
+              const SizedBox(width: AppDimensions.paddingMedium),
+              Expanded(
+                child: Text(profile.name, style: theme.textTheme.titleSmall),
+              ),
+              CustomIconButton.normal(
+                iconPath: CustomIcons.delete,
+                onTap: () => onRemoveProfile(profile),
+              ),
+            ],
           ),
-          CustomIconButton.normal(
-            iconPath: CustomIcons.delete,
-            onTap: () => onRemoveProfile(profile),
-          ),
-        ],
+        ),
       ),
     );
+  }
+
+  Widget _buildNewProfileButton(BuildContext context, bool hasOtherProfiles) {
+    final localizations = AppLocalizations.of(context)!;
+    final borderRadiusForNewProfile = _buildBorderRadiusForNewProfile(
+      hasOtherProfiles,
+    );
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border: _buildBorderForNewProfile(context, hasOtherProfiles),
+        borderRadius: borderRadiusForNewProfile,
+      ),
+      child: InkWell(
+        onTap: onNewProfile,
+        borderRadius: borderRadiusForNewProfile,
+        child: Padding(
+          padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const CustomIcon(iconPath: CustomIcons.add),
+              const SizedBox(width: AppDimensions.paddingMedium),
+              Text(localizations.settingsProfileNewProfile),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  BorderRadius _buildBorderRadiusForOtherProfile(bool isFirst) {
+    return BorderRadius.vertical(
+      top: isFirst
+          ? const Radius.circular(AppDimensions.borderRadiusMedium)
+          : Radius.zero,
+    );
+  }
+
+  BorderRadius _buildBorderRadiusForNewProfile(bool hasOtherProfiles) {
+    return BorderRadius.vertical(
+      top: hasOtherProfiles
+          ? Radius.zero
+          : const Radius.circular(AppDimensions.borderRadiusMedium),
+      bottom: const Radius.circular(AppDimensions.borderRadiusMedium),
+    );
+  }
+
+  Border _buildBorderForNewProfile(
+    BuildContext context,
+    bool hasOtherProfiles,
+  ) {
+    final theme = Theme.of(context);
+    return hasOtherProfiles
+        ? Border(
+            left: BorderSide(color: theme.colorScheme.outline),
+            right: BorderSide(color: theme.colorScheme.outline),
+            bottom: BorderSide(color: theme.colorScheme.outline),
+          )
+        : Border.all(color: theme.colorScheme.outline);
   }
 }

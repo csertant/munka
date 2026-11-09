@@ -19,10 +19,12 @@ abstract final class AppColors {
     tertiary: white,
     onTertiary: blue,
     surface: white,
-    onSurface: lightGrey,
+    onSurface: black,
     error: darkGrey,
     onError: lightGrey,
     outline: black,
+    outlineVariant: darkGrey,
+    shadow: lightGrey,
   );
 
   static const darkColorScheme = ColorScheme(
@@ -34,9 +36,11 @@ abstract final class AppColors {
     tertiary: black,
     onTertiary: blue,
     surface: black,
-    onSurface: darkGrey,
+    onSurface: white,
     error: lightGrey,
     onError: darkGrey,
     outline: white,
+    outlineVariant: lightGrey,
+    shadow: darkGrey,
   );
 }
