@@ -41,7 +41,7 @@ class _SettingsScreenState extends State<SettingsProfilesScreen> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: CustomAppBar(title: localizations.settingsScreenTitle),
+      appBar: CustomAppBar.text(text: localizations.settingsScreenTitle),
       body: ListenableBuilder(
         listenable: widget.viewModel.load,
         builder: (context, child) {

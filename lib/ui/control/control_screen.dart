@@ -32,8 +32,13 @@ class _ControlScreenState extends State<ControlScreen> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
+    final brightness = Theme.of(context).brightness;
     return Scaffold(
-      appBar: CustomAppBar(title: localizations.controlScreenTitle),
+      appBar: CustomAppBar.image(
+        imagePath: brightness == Brightness.light
+            ? CustomIcons.appIconLight
+            : CustomIcons.appIconDark,
+      ),
       body: ListenableBuilder(
         listenable: widget.viewModel.load,
         builder: (context, child) {

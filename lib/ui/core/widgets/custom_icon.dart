@@ -4,48 +4,54 @@ import 'package:material_ui/material_ui.dart';
 import '../themes/dimensions.dart';
 
 abstract class CustomIcons {
-  static const String stats = 'assets/icons/stats.svg';
-  static const String control = 'assets/icons/control.svg';
-  static const String settings = 'assets/icons/settings.svg';
+  static const _basePath = 'assets/icons';
+  static const _basePathLetters = '$_basePath/letters';
 
-  static const String add = 'assets/icons/add.svg';
-  static const String edit = 'assets/icons/edit.svg';
-  static const String delete = 'assets/icons/delete.svg';
+  static const appIconLight = '$_basePath/icon.png';
+  static const appIconDark = '$_basePath/icon_white.png';
 
-  static const String play = 'assets/icons/play.svg';
-  static const String pause = 'assets/icons/pause.svg';
-  static const String stop = 'assets/icons/stop.svg';
+  static const stats = '$_basePath/stats.svg';
+  static const control = '$_basePath/control.svg';
+  static const settings = '$_basePath/settings.svg';
 
-  static const String user = 'assets/icons/user.svg';
-  static const String userAdd = 'assets/icons/user_add.svg';
-  static const String userDelete = 'assets/icons/user_delete.svg';
+  static const add = '$_basePath/add.svg';
+  static const edit = '$_basePath/edit.svg';
+  static const delete = '$_basePath/delete.svg';
 
-  static const String a = 'assets/icons/letters/a.svg';
-  static const String b = 'assets/icons/letters/b.svg';
-  static const String c = 'assets/icons/letters/c.svg';
-  static const String d = 'assets/icons/letters/d.svg';
-  static const String e = 'assets/icons/letters/e.svg';
-  static const String f = 'assets/icons/letters/f.svg';
-  static const String g = 'assets/icons/letters/g.svg';
-  static const String h = 'assets/icons/letters/h.svg';
-  static const String i = 'assets/icons/letters/i.svg';
-  static const String j = 'assets/icons/letters/j.svg';
-  static const String k = 'assets/icons/letters/k.svg';
-  static const String l = 'assets/icons/letters/l.svg';
-  static const String m = 'assets/icons/letters/m.svg';
-  static const String n = 'assets/icons/letters/n.svg';
-  static const String o = 'assets/icons/letters/o.svg';
-  static const String p = 'assets/icons/letters/p.svg';
-  static const String q = 'assets/icons/letters/q.svg';
-  static const String r = 'assets/icons/letters/r.svg';
-  static const String s = 'assets/icons/letters/s.svg';
-  static const String t = 'assets/icons/letters/t.svg';
-  static const String u = 'assets/icons/letters/u.svg';
-  static const String v = 'assets/icons/letters/v.svg';
-  static const String w = 'assets/icons/letters/w.svg';
-  static const String x = 'assets/icons/letters/x.svg';
-  static const String y = 'assets/icons/letters/y.svg';
-  static const String z = 'assets/icons/letters/z.svg';
+  static const play = '$_basePath/play.svg';
+  static const pause = '$_basePath/pause.svg';
+  static const stop = '$_basePath/stop.svg';
+
+  static const user = '$_basePath/user.svg';
+  static const userAdd = '$_basePath/user_add.svg';
+  static const userDelete = '$_basePath/user_delete.svg';
+
+  static const a = '$_basePathLetters/a.svg';
+  static const b = '$_basePathLetters/b.svg';
+  static const c = '$_basePathLetters/c.svg';
+  static const d = '$_basePathLetters/d.svg';
+  static const e = '$_basePathLetters/e.svg';
+  static const f = '$_basePathLetters/f.svg';
+  static const g = '$_basePathLetters/g.svg';
+  static const h = '$_basePathLetters/h.svg';
+  static const i = '$_basePathLetters/i.svg';
+  static const j = '$_basePathLetters/j.svg';
+  static const k = '$_basePathLetters/k.svg';
+  static const l = '$_basePathLetters/l.svg';
+  static const m = '$_basePathLetters/m.svg';
+  static const n = '$_basePathLetters/n.svg';
+  static const o = '$_basePathLetters/o.svg';
+  static const p = '$_basePathLetters/p.svg';
+  static const q = '$_basePathLetters/q.svg';
+  static const r = '$_basePathLetters/r.svg';
+  static const s = '$_basePathLetters/s.svg';
+  static const t = '$_basePathLetters/t.svg';
+  static const u = '$_basePathLetters/u.svg';
+  static const v = '$_basePathLetters/v.svg';
+  static const w = '$_basePathLetters/w.svg';
+  static const x = '$_basePathLetters/x.svg';
+  static const y = '$_basePathLetters/y.svg';
+  static const z = '$_basePathLetters/z.svg';
 
   static const Map<String, String> _letterIcons = {
     'a': a,

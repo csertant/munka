@@ -33,7 +33,7 @@ class _StatsScreenState extends State<StatsScreen> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: CustomAppBar(title: localizations.statsScreenTitle),
+      appBar: CustomAppBar.text(text: localizations.statsScreenTitle),
       body: ListenableBuilder(
         listenable: widget.viewModel.load,
         builder: (context, child) {
