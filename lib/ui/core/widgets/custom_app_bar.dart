@@ -27,7 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             width: AppDimensions.appBarHeight - AppDimensions.paddingMedium,
             height: AppDimensions.appBarHeight - AppDimensions.paddingMedium,
           )
-        : Text(this.text!);
+        : Text(text!);
     return AppBar(
       title: title,
       titleTextStyle: Theme.of(context).textTheme.titleLarge,

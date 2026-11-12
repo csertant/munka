@@ -19,7 +19,7 @@ abstract final class AppTheme {
     displaySmall: _baseTextStyle.copyWith(color: Colors.deepPurple),
 
     //Currently unused
-    headlineLarge: _baseTextStyle.copyWith(color: Colors.deepPurple),
+    headlineLarge: _baseTextStyle.copyWith(fontSize: 75),
     headlineMedium: _baseTextStyle.copyWith(color: Colors.deepPurple),
     headlineSmall: _baseTextStyle.copyWith(color: Colors.deepPurple),
 

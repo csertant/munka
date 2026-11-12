@@ -15,31 +15,40 @@ class ControlViewModel extends ChangeNotifier {
     load = Command0(_load);
 
     _sessionManager.addListener(_onSessionChanged);
-    _timeEntriesSubscription = _timeEntriesRepository
-        .watchRecentEntries(profileId: _sessionManager.profileId!)
-        .listen(_onTimeEntriesChanged);
-    _activeEntrySubscription = _timeEntriesRepository
-        .watchActiveEntry(profileId: _sessionManager.profileId!)
-        .listen(_onActiveEntryChanged);
+    _timeEntriesStream = _timeEntriesRepository.watchRecentEntries(
+      profileId: _sessionManager.profileId!,
+    );
+    _activeEntryStream = _timeEntriesRepository.watchActiveEntry(
+      profileId: _sessionManager.profileId!,
+    );
 
     unawaited(load.execute());
   }
 
   final SessionManager _sessionManager;
   final TimeEntriesRepository _timeEntriesRepository;
-  StreamSubscription<List<TimeEntry>>? _timeEntriesSubscription;
-  StreamSubscription<TimeEntry?>? _activeEntrySubscription;
+  late Stream<List<TimeEntry>> _timeEntriesStream;
+  late Stream<TimeEntry?> _activeEntryStream;
 
-  List<TimeEntry> _timeEntries = [];
   TimeEntry? _activeEntry;
+
+  Timer? _ticker;
+  DateTime _currentTime = DateTime.now();
+  DateTime? _startedAt;
+  Duration _elapsed = Duration.zero;
 
   late Command0<void> load;
 
-  List<TimeEntry> get timeEntries => _timeEntries;
+  Stream<List<TimeEntry>> get timeEntriesStream => _timeEntriesStream;
+  Stream<TimeEntry?> get activeEntryStream => _activeEntryStream;
   TimeEntry? get activeEntry => _activeEntry;
+  bool get isTracking => _startedAt != null;
+  DateTime get currentTime => _currentTime;
+  Duration get elapsed => _elapsed;
 
   Future<Result<void>> _load() async {
     try {
+      _startTicker();
       final profileId = _sessionManager.profileId;
       if (profileId == null) {
         return Result.error(NotFoundError('No active session found'));
@@ -51,37 +60,44 @@ class ControlViewModel extends ChangeNotifier {
     }
   }
 
+  void _startTicker() {
+    _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
+      final now = DateTime.now();
+      _currentTime = now;
+
+      if (_startedAt != null) {
+        _elapsed = now.difference(_startedAt!);
+      }
+      notifyListeners();
+    });
+  }
+
+  void startTracking({DateTime? existingStart}) {
+    _startedAt = existingStart ?? DateTime.now();
+    _elapsed = DateTime.now().difference(_startedAt!);
+    notifyListeners();
+  }
+
+  void stopTracking() {
+    _startedAt = null;
+    _elapsed = Duration.zero;
+    notifyListeners();
+  }
+
   Future<void> _onSessionChanged() async {
-    await _timeEntriesSubscription?.cancel();
-    _timeEntriesSubscription = _timeEntriesRepository
-        .watchRecentEntries(profileId: _sessionManager.profileId!)
-        .listen((_) {
-          notifyListeners();
-        });
-    await _activeEntrySubscription?.cancel();
-    _activeEntrySubscription = _timeEntriesRepository
-        .watchActiveEntry(profileId: _sessionManager.profileId!)
-        .listen((_) {
-          notifyListeners();
-        });
+    _timeEntriesStream = _timeEntriesRepository.watchRecentEntries(
+      profileId: _sessionManager.profileId!,
+    );
+    _activeEntryStream = _timeEntriesRepository.watchActiveEntry(
+      profileId: _sessionManager.profileId!,
+    );
     unawaited(load.execute());
-  }
-
-  void _onTimeEntriesChanged(List<TimeEntry> timeEntries) {
-    _timeEntries = timeEntries;
-    notifyListeners();
-  }
-
-  void _onActiveEntryChanged(TimeEntry? activeEntry) {
-    _activeEntry = activeEntry;
-    notifyListeners();
   }
 
   @override
   Future<void> dispose() async {
     _sessionManager.removeListener(_onSessionChanged);
-    await _timeEntriesSubscription?.cancel();
-    await _activeEntrySubscription?.cancel();
+    _ticker?.cancel();
     super.dispose();
   }
 }
