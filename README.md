@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="assets/icons/appicon_2x.png" alt="munka logo" width="120" />
+	<img src="assets/icons/icon_2x.png" alt="munka logo" width="180" />
 </p>
 
 munka
