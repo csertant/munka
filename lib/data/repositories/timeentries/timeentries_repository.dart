@@ -4,6 +4,7 @@ import '../../database/database.dart';
 abstract class TimeEntriesRepository {
   Future<Result<TimeEntry?>> getActiveEntry({required Id profileId});
   Future<Result<List<TimeEntry>>> getRecentEntries({required Id profileId});
+  Future<Result<TimeEntry>> getTimeEntryById({required Id timeEntryId});
 
   Stream<TimeEntry?> watchActiveEntry({required Id profileId});
   Stream<List<TimeEntry>> watchRecentEntries({required Id profileId});

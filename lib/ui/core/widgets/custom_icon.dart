@@ -22,6 +22,8 @@ abstract class CustomIcons {
   static const pause = '$_basePath/pause.svg';
   static const stop = '$_basePath/stop.svg';
 
+  static const list = '$_basePath/list.svg';
+
   static const user = '$_basePath/user.svg';
   static const userAdd = '$_basePath/user_add.svg';
   static const userDelete = '$_basePath/user_delete.svg';

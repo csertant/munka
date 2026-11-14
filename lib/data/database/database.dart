@@ -175,11 +175,19 @@ class AppDatabase extends _$AppDatabase {
         .get();
   }
 
+  Future<TimeEntry?> getTimeEntryById({required Id timeEntryId}) {
+    return (select(
+      timeEntries,
+    )..where((tbl) => tbl.id.equals(timeEntryId))).getSingleOrNull();
+  }
+
   Future<void> insertOrUpdateEntry({required TimeEntriesCompanion entry}) {
     return into(timeEntries).insertOnConflictUpdate(entry);
   }
 
-  Future<void> deleteEntry(Id id) {
-    return (delete(timeEntries)..where((tbl) => tbl.id.equals(id))).go();
+  Future<void> deleteEntry({required Id timeEntryId}) {
+    return (delete(
+      timeEntries,
+    )..where((tbl) => tbl.id.equals(timeEntryId))).go();
   }
 }

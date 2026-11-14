@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
+import '../../../routing/routes.dart';
 import '../../core/themes/dimensions.dart';
 import '../../core/widgets/widgets.dart';
 import '../control_viewmodel.dart';
@@ -29,24 +30,43 @@ class ControlButtons extends StatelessWidget {
     final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(AppDimensions.paddingMedium),
-      child: ValueListenableBuilder<bool>(
-        valueListenable: viewModel.isTracking,
-        builder: (context, tracking, _) {
-          if (!tracking) {
-            return CustomIconButton.normal(
-              iconPath: CustomIcons.play,
-              onTap: viewModel.startTracking.execute,
-              tooltip: localizations.controlStartButtonLabel,
-              size: AppDimensions.iconSizeLarge,
-            );
-          }
-          return CustomIconButton.normal(
-            iconPath: CustomIcons.stop,
-            onTap: () => _handleStopPressed(context),
-            tooltip: localizations.controlStopButtonLabel,
-            size: AppDimensions.iconSizeLarge,
-          );
-        },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ValueListenableBuilder<bool>(
+            valueListenable: viewModel.isTracking,
+            builder: (context, tracking, _) {
+              if (!tracking) {
+                return CustomIconButton.normal(
+                  iconPath: CustomIcons.play,
+                  onTap: viewModel.startTracking.execute,
+                  tooltip: localizations.controlStartButtonLabel,
+                  size: AppDimensions.iconSizeLarge,
+                );
+              }
+              return CustomIconButton.normal(
+                iconPath: CustomIcons.stop,
+                onTap: () => _handleStopPressed(context),
+                tooltip: localizations.controlStopButtonLabel,
+                size: AppDimensions.iconSizeLarge,
+              );
+            },
+          ),
+          const SizedBox(width: AppDimensions.paddingMedium),
+          CustomIconButton.redirectInApp(
+            iconPath: CustomIcons.add,
+            tooltip: localizations.controlAddButtonLabel,
+            route: Routes.controlEntriesNew,
+            context: context,
+          ),
+          const SizedBox(width: AppDimensions.paddingMedium),
+          CustomIconButton.redirectInApp(
+            iconPath: CustomIcons.list,
+            tooltip: localizations.controlListButtonLabel,
+            route: Routes.controlEntriesList,
+            context: context,
+          ),
+        ],
       ),
     );
   }

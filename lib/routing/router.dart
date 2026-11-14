@@ -7,6 +7,10 @@ import '../data/repositories/settings/settings_repository.dart';
 import '../data/repositories/timeentries/timeentries_repository.dart';
 import '../ui/control/control_screen.dart';
 import '../ui/control/control_viewmodel.dart';
+import '../ui/control_entries/control_entries_screen.dart';
+import '../ui/control_entries/control_entries_viewmodel.dart';
+import '../ui/control_entries_list/control_entries_list_screen.dart';
+import '../ui/control_entries_list/control_entries_list_viewmodel.dart';
 import '../ui/core/widgets/widgets.dart';
 import '../ui/settings/settings_screen.dart';
 import '../ui/settings/settings_viewmodel.dart';
@@ -50,6 +54,43 @@ GoRouter router() => GoRouter(
                 );
                 return ControlScreen(viewModel: viewModel);
               },
+              routes: [
+                GoRoute(
+                  path: Routes.controlEntriesEditSegment(':id'),
+                  builder: (context, state) {
+                    final timeEntryId = state.pathParameters['id']!;
+                    final viewModel = ControlEntriesViewModel(
+                      timeEntriesRepository: context
+                          .read<TimeEntriesRepository>(),
+                      sessionManager: context.read<SessionManager>(),
+                      timeEntryId: int.tryParse(timeEntryId),
+                    );
+                    return ControlEntriesScreen(viewModel: viewModel);
+                  },
+                ),
+                GoRoute(
+                  path: Routes.controlEntriesNewSegment,
+                  builder: (context, state) {
+                    final viewModel = ControlEntriesViewModel(
+                      timeEntriesRepository: context
+                          .read<TimeEntriesRepository>(),
+                      sessionManager: context.read<SessionManager>(),
+                    );
+                    return ControlEntriesScreen(viewModel: viewModel);
+                  },
+                ),
+                GoRoute(
+                  path: Routes.controlEntriesListSegment,
+                  builder: (context, state) {
+                    final viewModel = ControlEntriesListViewModel(
+                      timeEntriesRepository: context
+                          .read<TimeEntriesRepository>(),
+                      sessionManager: context.read<SessionManager>(),
+                    );
+                    return ControlEntriesListScreen(viewModel: viewModel);
+                  },
+                ),
+              ],
             ),
           ],
         ),

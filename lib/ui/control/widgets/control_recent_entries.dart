@@ -62,6 +62,7 @@ class ControlRecentEntries extends StatelessWidget {
         '+ $formattedDuration h',
         style: theme.textTheme.titleMedium!.copyWith(
           color: theme.colorScheme.onPrimary,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

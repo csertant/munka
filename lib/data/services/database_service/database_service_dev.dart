@@ -71,7 +71,7 @@ class DatabaseServiceDev implements DatabaseService {
     } else if (profileId == otherProfile.id) {
       return Result.ok(otherProfile);
     } else {
-      return Result.error(DatabaseError('Profile not found'));
+      return Result.error(NotFoundError('Profile not found.'));
     }
   }
 
@@ -133,12 +133,24 @@ class DatabaseServiceDev implements DatabaseService {
   }
 
   @override
+  Future<Result<TimeEntry>> getTimeEntryById({required Id timeEntryId}) async {
+    try {
+      final entry = exampleRecentEntries.firstWhere(
+        (entry) => entry.id == timeEntryId,
+      );
+      return Result.ok(entry);
+    } on Exception catch (_) {
+      return Result.error(NotFoundError('Time entry not found.'));
+    }
+  }
+
+  @override
   Future<Result<void>> saveEntry({required TimeEntriesCompanion entry}) async {
     return const Result.ok(null);
   }
 
   @override
-  Future<Result<void>> removeEntry({required Id id}) async {
+  Future<Result<void>> removeEntry({required Id timeEntryId}) async {
     return const Result.ok(null);
   }
 }

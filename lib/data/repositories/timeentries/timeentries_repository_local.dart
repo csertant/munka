@@ -21,6 +21,11 @@ class TimeEntriesRepositoryLocal extends TimeEntriesRepository {
   }
 
   @override
+  Future<Result<TimeEntry>> getTimeEntryById({required Id timeEntryId}) {
+    return _databaseService.getTimeEntryById(timeEntryId: timeEntryId);
+  }
+
+  @override
   Stream<TimeEntry?> watchActiveEntry({required Id profileId}) {
     return _databaseService.watchActiveEntry(profileId: profileId);
   }
@@ -69,6 +74,6 @@ class TimeEntriesRepositoryLocal extends TimeEntriesRepository {
 
   @override
   Future<Result<void>> removeEntry({required Id entryId}) {
-    return _databaseService.removeEntry(id: entryId);
+    return _databaseService.removeEntry(timeEntryId: entryId);
   }
 }

@@ -14,7 +14,7 @@ class SettingsProfilesViewModel extends ChangeNotifier {
   }) {
     load = Command0(_load);
     createProfile = Command2(_createProfile);
-    modifyProfile = Command1(_modifyProfile);
+    modifyProfile = Command2(_modifyProfile);
 
     unawaited(load.execute());
   }
@@ -25,7 +25,7 @@ class SettingsProfilesViewModel extends ChangeNotifier {
 
   late Command0<void> load;
   late Command2<void, String, String?> createProfile;
-  late Command1<void, Profile> modifyProfile;
+  late Command2<void, String, String?> modifyProfile;
 
   bool get isEditing => _profileId != null;
   Profile? get profile => _profile;
@@ -41,6 +41,9 @@ class SettingsProfilesViewModel extends ChangeNotifier {
       switch (profileResult) {
         case Ok<Profile>():
           _profile = profileResult.value;
+          if (_profile == null) {
+            return Result.error(NotFoundError('Profile not found.'));
+          }
           return const Result.ok(null);
         case Error<Profile>():
           return Result.error(profileResult.error);
@@ -61,12 +64,12 @@ class SettingsProfilesViewModel extends ChangeNotifier {
     }
   }
 
-  Future<Result<void>> _modifyProfile(Profile profile) {
+  Future<Result<void>> _modifyProfile(String name, String? description) {
     try {
       return _profileRepository.modifyProfile(
-        profile: profile.copyWith(
-          name: profile.name.trim(),
-          description: Value(profile.description?.trim()),
+        profile: profile!.copyWith(
+          name: name.trim(),
+          description: Value(description?.trim()),
         ),
       );
     } finally {

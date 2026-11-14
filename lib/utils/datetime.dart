@@ -1,11 +1,11 @@
 import 'package:intl/intl.dart';
 
 abstract final class AppDateFormat {
-  static final DateFormat yMMdd = DateFormat('y. MM. dd.');
-  static final DateFormat yMMddHHmm = DateFormat('y. MM. dd. HH:mm');
+  static final yMMdd = DateFormat('y. MM. dd.');
+  static final yMMddHHmm = DateFormat('y. MM. dd. HH:mm');
   // Keep naming consistent with the intl package's formatting patterns.
   // ignore: non_constant_identifier_names
-  static final DateFormat HHmm = DateFormat('HH:mm');
+  static final HHmm = DateFormat('HH:mm');
 }
 
 abstract final class AppDateUtils {

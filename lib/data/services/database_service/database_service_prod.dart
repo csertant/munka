@@ -79,12 +79,19 @@ class DatabaseServiceProd implements DatabaseService {
   }
 
   @override
+  Future<Result<TimeEntry>> getTimeEntryById({required Id timeEntryId}) {
+    return guardNotNull(
+      () => _database.getTimeEntryById(timeEntryId: timeEntryId),
+    );
+  }
+
+  @override
   Future<Result<void>> saveEntry({required TimeEntriesCompanion entry}) {
     return guardVoid(() => _database.insertOrUpdateEntry(entry: entry));
   }
 
   @override
-  Future<Result<void>> removeEntry({required Id id}) {
-    return guard(() => _database.deleteEntry(id));
+  Future<Result<void>> removeEntry({required Id timeEntryId}) {
+    return guard(() => _database.deleteEntry(timeEntryId: timeEntryId));
   }
 }

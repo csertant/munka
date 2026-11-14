@@ -52,7 +52,7 @@ class StatsViewModel extends ChangeNotifier {
         .listen((_) {
           notifyListeners();
         });
-    unawaited(load.execute());
+    await load.execute();
   }
 
   void _onTimeEntriesChanged(List<TimeEntry> timeEntries) {
