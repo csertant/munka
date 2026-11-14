@@ -57,13 +57,29 @@ class _ControlScreenState extends State<ControlScreen> {
             );
           }
         },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ControlTimer(viewModel: widget.viewModel),
-            ControlButtons(viewModel: widget.viewModel),
-            ControlRecentEntries(viewModel: widget.viewModel),
-          ],
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final availableHeight = constraints.maxHeight;
+            final initialTopHeight = availableHeight * 0.90;
+            final collapsedTopHeight = availableHeight * 0.50;
+            return CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                SliverPersistentHeader(
+                  pinned: true,
+                  delegate: CustomSliverPersistentHeaderDelegate(
+                    minHeight: collapsedTopHeight,
+                    maxHeight: initialTopHeight,
+                    children: [
+                      ControlTimer(viewModel: widget.viewModel),
+                      ControlButtons(viewModel: widget.viewModel),
+                    ],
+                  ),
+                ),
+                ControlRecentEntries(viewModel: widget.viewModel),
+              ],
+            );
+          },
         ),
       ),
     );

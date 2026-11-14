@@ -14,28 +14,26 @@ class ControlRecentEntries extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(AppDimensions.paddingMedium),
-        child: ValueListenableBuilder<List<TimeEntry>>(
-          valueListenable: viewModel.timeEntries,
-          builder: (context, timeEntries, child) {
-            if (timeEntries.isNotEmpty) {
-              return ListView.separated(
-                itemCount: timeEntries.length,
-                itemBuilder: (context, index) =>
-                    _buildTimeEntryTile(context, timeEntries[index]),
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: AppDimensions.paddingMedium),
-              );
-            } else {
-              return Center(
-                child: Text(localizations.controlNoRecentEntriesLabel),
-              );
-            }
-          },
-        ),
-      ),
+    return ValueListenableBuilder<List<TimeEntry>>(
+      valueListenable: viewModel.timeEntries,
+      builder: (context, timeEntries, child) {
+        if (timeEntries.isNotEmpty) {
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) =>
+                  _buildTimeEntryTile(context, timeEntries[index]),
+              childCount: timeEntries.length,
+            ),
+          );
+        } else {
+          return SliverFillRemaining(
+            hasScrollBody: false,
+            child: Center(
+              child: Text(localizations.controlNoRecentEntriesLabel),
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -46,23 +44,31 @@ class ControlRecentEntries extends StatelessWidget {
       timeEntry.startedAt,
       timeEntry.endedAt!,
     );
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: theme.colorScheme.outline),
-        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        AppDimensions.paddingMedium,
+        AppDimensions.paddingMedium,
+        AppDimensions.paddingMedium,
+        0,
       ),
-      title: Text(
-        timeEntry.project ?? localizations.controlProjectEmptyPlaceholder,
-        style: theme.textTheme.titleMedium,
-      ),
-      subtitle: Text(
-        '${AppDateFormat.yMMddHHmm.format(timeEntry.startedAt)} - ${AppDateFormat.yMMddHHmm.format(timeEntry.endedAt!)}',
-      ),
-      trailing: Text(
-        '+ $formattedDuration h',
-        style: theme.textTheme.titleMedium!.copyWith(
-          color: theme.colorScheme.onPrimary,
-          fontWeight: FontWeight.bold,
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: theme.colorScheme.outline),
+          borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
+        ),
+        title: Text(
+          timeEntry.project ?? localizations.controlProjectEmptyPlaceholder,
+          style: theme.textTheme.titleMedium,
+        ),
+        subtitle: Text(
+          '${AppDateFormat.yMMddHHmm.format(timeEntry.startedAt)} - ${AppDateFormat.yMMddHHmm.format(timeEntry.endedAt!)}',
+        ),
+        trailing: Text(
+          '+ $formattedDuration h',
+          style: theme.textTheme.titleMedium!.copyWith(
+            color: theme.colorScheme.onPrimary,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
