@@ -20,4 +20,19 @@ abstract final class AppDateUtils {
 
     return '$formattedHours:$formattedMinutes:$formattedSeconds';
   }
+
+  static String formatDurationDecimal(DateTime start, DateTime end) {
+    final duration = end.difference(start);
+    final decimalHours = duration.inMinutes / 60.0;
+
+    return decimalHours.toStringAsFixed(2);
+  }
+
+  static String formatDurationHoursMinutes(DateTime start, DateTime end) {
+    final duration = end.difference(start);
+    final hours = duration.inHours;
+    final minutes = duration.inMinutes.remainder(60);
+
+    return '$hours:$minutes';
+  }
 }

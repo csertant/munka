@@ -38,7 +38,7 @@ final List<TimeEntry> exampleRecentEntries = [
     profileId: 1,
     project: 'Example Project B',
     notes: 'Example Notes 3',
-    startedAt: DateTime.now().subtract(const Duration(minutes: 10)),
+    startedAt: DateTime.now().subtract(const Duration(minutes: 65)),
     endedAt: DateTime.now().subtract(const Duration(minutes: 5)),
   ),
 ];

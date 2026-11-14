@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../../data/database/database.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../../utils/utils.dart';
 import '../../core/themes/dimensions.dart';
 import '../control_viewmodel.dart';
 
@@ -14,35 +15,54 @@ class ControlRecentEntries extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Expanded(
-      child: ValueListenableBuilder<List<TimeEntry>>(
-        valueListenable: viewModel.timeEntries,
-        builder: (context, timeEntries, child) {
-          if (timeEntries.isNotEmpty) {
-            return ListView.builder(
-              itemCount: timeEntries.length,
-              itemBuilder: (context, index) =>
-                  _buildTimeEntryTile(timeEntries[index]),
-            );
-          } else {
-            return Center(
-              child: Text(localizations.controlNoRecentEntriesLabel),
-            );
-          }
-        },
+      child: Padding(
+        padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+        child: ValueListenableBuilder<List<TimeEntry>>(
+          valueListenable: viewModel.timeEntries,
+          builder: (context, timeEntries, child) {
+            if (timeEntries.isNotEmpty) {
+              return ListView.separated(
+                itemCount: timeEntries.length,
+                itemBuilder: (context, index) =>
+                    _buildTimeEntryTile(context, timeEntries[index]),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: AppDimensions.paddingMedium),
+              );
+            } else {
+              return Center(
+                child: Text(localizations.controlNoRecentEntriesLabel),
+              );
+            }
+          },
+        ),
       ),
     );
   }
 
-  Widget _buildTimeEntryTile(TimeEntry timeEntry) {
-    //TODO: Format the time entry display as needed
+  Widget _buildTimeEntryTile(BuildContext context, TimeEntry timeEntry) {
+    final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context)!;
+    final formattedDuration = AppDateUtils.formatDurationDecimal(
+      timeEntry.startedAt,
+      timeEntry.endedAt!,
+    );
     return ListTile(
       shape: RoundedRectangleBorder(
+        side: BorderSide(color: theme.colorScheme.outline),
         borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
       ),
-      title: Text(timeEntry.project ?? 'No project'),
-      subtitle: Text(timeEntry.notes ?? 'No notes'),
+      title: Text(
+        timeEntry.project ?? localizations.controlProjectEmptyPlaceholder,
+        style: theme.textTheme.titleMedium,
+      ),
+      subtitle: Text(
+        '${AppDateFormat.yMMddHHmm.format(timeEntry.startedAt)} - ${AppDateFormat.yMMddHHmm.format(timeEntry.endedAt!)}',
+      ),
       trailing: Text(
-        '${timeEntry.startedAt} - ${timeEntry.endedAt ?? 'In progress'}',
+        '+ $formattedDuration h',
+        style: theme.textTheme.titleMedium!.copyWith(
+          color: theme.colorScheme.onPrimary,
+        ),
       ),
     );
   }

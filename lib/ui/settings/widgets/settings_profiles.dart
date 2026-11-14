@@ -58,6 +58,13 @@ class SettingsProfiles extends StatelessWidget {
             children: [
               CustomCircleAvatar(iconPath: CustomIcons.fromName(profile.name)),
               const SizedBox(height: AppDimensions.paddingMedium),
+              Text(
+                '@${selectedProfile.id}',
+                style: theme.textTheme.bodyMedium!.copyWith(
+                  color: theme.colorScheme.onTertiary,
+                ),
+              ),
+              const SizedBox(height: AppDimensions.paddingSmall),
               Text(profile.name, style: theme.textTheme.titleLarge),
               const SizedBox(height: AppDimensions.paddingSmall),
               Text(

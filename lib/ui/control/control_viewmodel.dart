@@ -56,6 +56,7 @@ class ControlViewModel extends ChangeNotifier {
   late Command0<void> clearTracking;
 
   TimeEntry? get activeEntry => _activeEntry;
+  String? get profileId => _sessionManager.profileId?.toString();
   DateTime get currentTime => _currentTime;
   Duration get elapsed => _elapsed;
 

@@ -11,6 +11,7 @@ class ControlTimer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.paddingExtraLarge),
@@ -21,14 +22,20 @@ class ControlTimer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
+                  '@${viewModel.profileId ?? ''}',
+                  style: theme.textTheme.bodyMedium!.copyWith(
+                    color: theme.colorScheme.onTertiary,
+                  ),
+                ),
+                Text(
                   viewModel.isTracking.value
                       ? AppDateUtils.formatElapsedTime(viewModel.elapsed)
                       : AppDateFormat.HHmm.format(viewModel.currentTime),
-                  style: Theme.of(context).textTheme.headlineLarge,
+                  style: theme.textTheme.headlineLarge,
                 ),
                 Text(
                   AppDateFormat.yMMdd.format(viewModel.currentTime),
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: theme.textTheme.titleLarge,
                 ),
               ],
             );
