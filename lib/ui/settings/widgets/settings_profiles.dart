@@ -59,10 +59,11 @@ class SettingsProfiles extends StatelessWidget {
               CustomCircleAvatar(iconPath: CustomIcons.fromName(profile.name)),
               const SizedBox(height: AppDimensions.paddingMedium),
               Text(profile.name, style: theme.textTheme.titleLarge),
+              const SizedBox(height: AppDimensions.paddingSmall),
               Text(
                 profile.description ??
                     AppLocalizations.of(context)!.settingsProfileNoDescription,
-                style: theme.textTheme.bodyLarge,
+                style: theme.textTheme.bodyMedium,
               ),
             ],
           ),
@@ -104,10 +105,10 @@ class SettingsProfiles extends StatelessWidget {
               ),
               const SizedBox(width: AppDimensions.paddingMedium),
               Expanded(
-                child: Text(profile.name, style: theme.textTheme.titleSmall),
+                child: Text(profile.name, style: theme.textTheme.titleMedium),
               ),
               CustomIconButton.normal(
-                iconPath: CustomIcons.delete,
+                iconPath: CustomIcons.userDelete,
                 onTap: () => onRemoveProfile(profile),
               ),
             ],

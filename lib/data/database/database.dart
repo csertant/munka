@@ -157,6 +157,24 @@ class AppDatabase extends _$AppDatabase {
         .watch();
   }
 
+  Future<TimeEntry?> getActiveEntry({required Id profileId}) {
+    return (select(timeEntries)
+          ..where(
+            (tbl) => tbl.profileId.equals(profileId) & tbl.endedAt.isNull(),
+          )
+          ..limit(1))
+        .getSingleOrNull();
+  }
+
+  Future<List<TimeEntry>> getRecentEntries({required Id profileId}) {
+    return (select(timeEntries)
+          ..where(
+            (tbl) => tbl.profileId.equals(profileId) & tbl.endedAt.isNotNull(),
+          )
+          ..orderBy([(tbl) => OrderingTerm.desc(tbl.startedAt)]))
+        .get();
+  }
+
   Future<void> insertOrUpdateEntry({required TimeEntriesCompanion entry}) {
     return into(timeEntries).insertOnConflictUpdate(entry);
   }

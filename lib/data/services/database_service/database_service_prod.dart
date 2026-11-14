@@ -69,6 +69,16 @@ class DatabaseServiceProd implements DatabaseService {
   }
 
   @override
+  Future<Result<TimeEntry?>> getActiveEntry({required Id profileId}) {
+    return guard(() => _database.getActiveEntry(profileId: profileId));
+  }
+
+  @override
+  Future<Result<List<TimeEntry>>> getRecentEntries({required Id profileId}) {
+    return guard(() => _database.getRecentEntries(profileId: profileId));
+  }
+
+  @override
   Future<Result<void>> saveEntry({required TimeEntriesCompanion entry}) {
     return guardVoid(() => _database.insertOrUpdateEntry(entry: entry));
   }

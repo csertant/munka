@@ -11,6 +11,16 @@ class TimeEntriesRepositoryLocal extends TimeEntriesRepository {
   final DatabaseService _databaseService;
 
   @override
+  Future<Result<TimeEntry?>> getActiveEntry({required Id profileId}) {
+    return _databaseService.getActiveEntry(profileId: profileId);
+  }
+
+  @override
+  Future<Result<List<TimeEntry>>> getRecentEntries({required Id profileId}) {
+    return _databaseService.getRecentEntries(profileId: profileId);
+  }
+
+  @override
   Stream<TimeEntry?> watchActiveEntry({required Id profileId}) {
     return _databaseService.watchActiveEntry(profileId: profileId);
   }
@@ -31,8 +41,7 @@ class TimeEntriesRepositoryLocal extends TimeEntriesRepository {
 
   @override
   Future<Result<void>> stopTimer({required TimeEntry entry}) {
-    final modifiedEntry = entry.copyWith(endedAt: Value(DateTime.now()));
-    return _databaseService.saveEntry(entry: modifiedEntry.toCompanion(true));
+    return _databaseService.saveEntry(entry: entry.toCompanion(true));
   }
 
   @override
@@ -41,12 +50,14 @@ class TimeEntriesRepositoryLocal extends TimeEntriesRepository {
     String? project,
     String? notes,
     required DateTime startedAt,
+    DateTime? endedAt,
   }) {
     final entry = TimeEntriesCompanion.insert(
       profileId: profileId,
       project: Value(project?.trim()),
       notes: Value(notes?.trim()),
       startedAt: startedAt,
+      endedAt: Value(endedAt),
     );
     return _databaseService.saveEntry(entry: entry);
   }

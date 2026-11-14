@@ -63,6 +63,26 @@ abstract final class AppTheme {
     scrolledUnderElevation: 0,
   );
 
+  static final _lightOutlinedButtonStyle = ButtonStyle(
+    elevation: const WidgetStatePropertyAll<double>(0),
+    backgroundColor: WidgetStatePropertyAll<Color>(
+      AppColors.lightColorScheme.onSurface,
+    ),
+    foregroundColor: WidgetStatePropertyAll<Color>(
+      AppColors.lightColorScheme.surface,
+    ),
+  );
+
+  static final _darkOutlinedButtonStyle = ButtonStyle(
+    elevation: const WidgetStatePropertyAll<double>(0),
+    backgroundColor: WidgetStatePropertyAll<Color>(
+      AppColors.darkColorScheme.onSurface,
+    ),
+    foregroundColor: WidgetStatePropertyAll<Color>(
+      AppColors.darkColorScheme.surface,
+    ),
+  );
+
   static const FloatingActionButtonThemeData _floatingActionButtonTheme =
       FloatingActionButtonThemeData(
         elevation: 0,
@@ -91,6 +111,9 @@ abstract final class AppTheme {
     navigationBarTheme: _lightNavigationBarTheme,
     floatingActionButtonTheme: _floatingActionButtonTheme,
     radioTheme: _radioTheme,
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: _lightOutlinedButtonStyle,
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -103,5 +126,8 @@ abstract final class AppTheme {
     navigationBarTheme: _darkNavigationBarTheme,
     floatingActionButtonTheme: _floatingActionButtonTheme,
     radioTheme: _radioTheme,
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: _darkOutlinedButtonStyle,
+    ),
   );
 }

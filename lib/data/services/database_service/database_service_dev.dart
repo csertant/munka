@@ -114,6 +114,25 @@ class DatabaseServiceDev implements DatabaseService {
   }
 
   @override
+  Future<Result<TimeEntry?>> getActiveEntry({required Id profileId}) async {
+    if (exampleActiveEntry.profileId == profileId) {
+      return Result.ok(exampleActiveEntry);
+    } else {
+      return const Result.ok(null);
+    }
+  }
+
+  @override
+  Future<Result<List<TimeEntry>>> getRecentEntries({
+    required Id profileId,
+  }) async {
+    final entries = exampleRecentEntries
+        .where((entry) => entry.profileId == profileId)
+        .toList();
+    return Result.ok(entries);
+  }
+
+  @override
   Future<Result<void>> saveEntry({required TimeEntriesCompanion entry}) async {
     return const Result.ok(null);
   }

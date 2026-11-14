@@ -1,6 +1,5 @@
 import 'package:material_ui/material_ui.dart';
 
-import '../../data/database/database.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../core/widgets/widgets.dart';
 import 'control_viewmodel.dart';
@@ -58,42 +57,13 @@ class _ControlScreenState extends State<ControlScreen> {
             );
           }
         },
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ListenableBuilder(
-                listenable: widget.viewModel,
-                builder: (context, child) {
-                  return Center(
-                    child: ControlTimer(
-                      currentTime: widget.viewModel.currentTime,
-                      elapsed: widget.viewModel.elapsed,
-                      isTracking: widget.viewModel.isTracking,
-                    ),
-                  );
-                },
-              ),
-              const ControlButtons(),
-              StreamBuilder<List<TimeEntry>>(
-                stream: widget.viewModel.timeEntriesStream,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    final timeEntries = snapshot.data!;
-                    return ControlRecentEntries(timeEntries: timeEntries);
-                  } else if (snapshot.hasError) {
-                    return ErrorIndicator(
-                      title: localizations.controlLoadErrorTitle,
-                      label: localizations.controlLoadErrorLabel,
-                      onPressed: widget.viewModel.load.execute,
-                    );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ControlTimer(viewModel: widget.viewModel),
+            ControlButtons(viewModel: widget.viewModel),
+            ControlRecentEntries(viewModel: widget.viewModel),
+          ],
         ),
       ),
     );
