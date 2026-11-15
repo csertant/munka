@@ -16,21 +16,6 @@ class ControlEntriesListScreen extends StatefulWidget {
 
 class _ControlEntriesListScreenState extends State<ControlEntriesListScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void didUpdateWidget(covariant ControlEntriesListScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
@@ -55,7 +40,11 @@ class _ControlEntriesListScreenState extends State<ControlEntriesListScreen> {
         child: ListenableBuilder(
           listenable: widget.viewModel,
           builder: (context, child) {
-            return const Center(child: Text('Control Entries List Screen'));
+            return ListView.builder(
+              itemCount: widget.viewModel.timeEntries.length,
+              itemBuilder: (context, index) =>
+                  TimeEntryTile(timeEntry: widget.viewModel.timeEntries[index]),
+            );
           },
         ),
       ),
