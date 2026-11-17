@@ -143,7 +143,7 @@ class SettingsProfiles extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CustomIcon(iconPath: CustomIcons.add),
+              const CustomIcon(iconPath: CustomIcons.userAdd),
               const SizedBox(width: AppDimensions.paddingMedium),
               Text(localizations.settingsProfileNewProfile),
             ],

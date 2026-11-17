@@ -23,8 +23,11 @@ abstract class CustomIcons {
   static const stop = '$_basePath/stop.svg';
 
   static const list = '$_basePath/list.svg';
-  static const keyboard = '$_basePath/keyboard.svg';
-  static const clock = '$_basePath/clock.svg';
+  static const share = '$_basePath/share.svg';
+
+  static const day = '$_basePath/day.svg';
+  static const week = '$_basePath/week.svg';
+  static const month = '$_basePath/month.svg';
 
   static const user = '$_basePath/user.svg';
   static const userAdd = '$_basePath/user_add.svg';
