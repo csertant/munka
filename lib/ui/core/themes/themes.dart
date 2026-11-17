@@ -65,21 +65,43 @@ abstract final class AppTheme {
 
   static final _lightOutlinedButtonStyle = ButtonStyle(
     elevation: const WidgetStatePropertyAll<double>(0),
-    backgroundColor: WidgetStatePropertyAll<Color>(
-      AppColors.lightColorScheme.onSurface,
+    shape: WidgetStatePropertyAll<OutlinedBorder>(
+      RoundedRectangleBorder(
+        side: BorderSide(color: AppColors.lightColorScheme.onSurface),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(AppDimensions.borderRadiusMedium),
+        ),
+      ),
     ),
+    backgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.pressed)) {
+        return AppColors.lightColorScheme.shadow;
+      }
+      return null;
+    }),
     foregroundColor: WidgetStatePropertyAll<Color>(
-      AppColors.lightColorScheme.surface,
+      AppColors.lightColorScheme.onSurface,
     ),
   );
 
   static final _darkOutlinedButtonStyle = ButtonStyle(
     elevation: const WidgetStatePropertyAll<double>(0),
-    backgroundColor: WidgetStatePropertyAll<Color>(
-      AppColors.darkColorScheme.onSurface,
+    shape: WidgetStatePropertyAll<OutlinedBorder>(
+      RoundedRectangleBorder(
+        side: BorderSide(color: AppColors.darkColorScheme.onSurface),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(AppDimensions.borderRadiusMedium),
+        ),
+      ),
     ),
+    backgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.pressed)) {
+        return AppColors.darkColorScheme.shadow;
+      }
+      return null;
+    }),
     foregroundColor: WidgetStatePropertyAll<Color>(
-      AppColors.darkColorScheme.surface,
+      AppColors.darkColorScheme.onSurface,
     ),
   );
 
@@ -135,35 +157,49 @@ abstract final class AppTheme {
     }),
   );
 
+  static final _ligthTextSelectionTheme = TextSelectionThemeData(
+    cursorColor: AppColors.lightColorScheme.onSecondary,
+    selectionColor: AppColors.lightColorScheme.shadow,
+    selectionHandleColor: AppColors.lightColorScheme.outlineVariant,
+  );
+
+  static final _darkTextSelectionTheme = TextSelectionThemeData(
+    cursorColor: AppColors.darkColorScheme.onSecondary,
+    selectionColor: AppColors.darkColorScheme.shadow,
+    selectionHandleColor: AppColors.darkColorScheme.outlineVariant,
+  );
+
   static ThemeData lightTheme = ThemeData(
+    appBarTheme: _appBarTheme,
     brightness: Brightness.light,
     colorScheme: AppColors.lightColorScheme,
-    textTheme: _textTheme,
+    floatingActionButtonTheme: _floatingActionButtonTheme,
     fontFamily: 'DotGothic16',
     fontFamilyFallback: const ['Arial', 'sans-serif'],
-    appBarTheme: _appBarTheme,
     navigationBarTheme: _lightNavigationBarTheme,
-    floatingActionButtonTheme: _floatingActionButtonTheme,
-    radioTheme: _radioTheme,
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: _lightOutlinedButtonStyle,
     ),
+    radioTheme: _radioTheme,
     switchTheme: _lightSwitchTheme,
+    textTheme: _textTheme,
+    textSelectionTheme: _ligthTextSelectionTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
+    appBarTheme: _appBarTheme,
     brightness: Brightness.dark,
     colorScheme: AppColors.darkColorScheme,
-    textTheme: _textTheme,
+    floatingActionButtonTheme: _floatingActionButtonTheme,
     fontFamily: 'DotGothic16',
     fontFamilyFallback: const ['Arial', 'sans-serif'],
-    appBarTheme: _appBarTheme,
     navigationBarTheme: _darkNavigationBarTheme,
-    floatingActionButtonTheme: _floatingActionButtonTheme,
-    radioTheme: _radioTheme,
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: _darkOutlinedButtonStyle,
     ),
+    radioTheme: _radioTheme,
     switchTheme: _darkSwitchTheme,
+    textTheme: _textTheme,
+    textSelectionTheme: _darkTextSelectionTheme,
   );
 }

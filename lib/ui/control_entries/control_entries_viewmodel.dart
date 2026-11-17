@@ -15,8 +15,8 @@ class ControlEntriesViewModel extends ChangeNotifier {
     this._timeEntryId,
   }) {
     load = Command0(_load);
-    createTimeEntry = Command4(_createTimeEntry);
-    modifyTimeEntry = Command4(_modifyTimeEntry);
+    createTimeEntry = Command0(_createTimeEntry);
+    modifyTimeEntry = Command0(_modifyTimeEntry);
 
     _sessionManager.addListener(_onSessionChanged);
 
@@ -28,13 +28,19 @@ class ControlEntriesViewModel extends ChangeNotifier {
 
   final Id? _timeEntryId;
   TimeEntry? _timeEntry;
+  final TextEditingController projectController = TextEditingController();
+  final TextEditingController notesController = TextEditingController();
+  DateTime? _startedAt;
+  DateTime? _endedAt;
 
   late Command0<void> load;
-  late Command4<void, String?, String?, DateTime, DateTime> createTimeEntry;
-  late Command4<void, String?, String?, DateTime, DateTime> modifyTimeEntry;
+  late Command0<void> createTimeEntry;
+  late Command0<void> modifyTimeEntry;
 
   bool get isEditing => _timeEntryId != null;
   TimeEntry? get timeEntry => _timeEntry;
+  DateTime? get startedAt => _startedAt;
+  DateTime? get endedAt => _endedAt;
 
   Future<Result<void>> _load() async {
     try {
@@ -43,6 +49,10 @@ class ControlEntriesViewModel extends ChangeNotifier {
         return Result.error(NotFoundError('No active session found'));
       }
       if (!isEditing) {
+        projectController.text = '';
+        notesController.text = '';
+        _startedAt = null;
+        _endedAt = null;
         return const Result.ok(null);
       }
       final timeEntryResult = await _timeEntriesRepository.getTimeEntryById(
@@ -51,6 +61,13 @@ class ControlEntriesViewModel extends ChangeNotifier {
       switch (timeEntryResult) {
         case Ok<TimeEntry>():
           _timeEntry = timeEntryResult.value;
+          if (_timeEntry == null) {
+            return Result.error(NotFoundError('Time entry not found.'));
+          }
+          projectController.text = _timeEntry!.project ?? '';
+          notesController.text = _timeEntry!.notes ?? '';
+          _startedAt = _timeEntry!.startedAt;
+          _endedAt = _timeEntry!.endedAt;
           return const Result.ok(null);
         case Error<TimeEntry>():
           return Result.error(timeEntryResult.error);
@@ -60,38 +77,38 @@ class ControlEntriesViewModel extends ChangeNotifier {
     }
   }
 
-  Future<Result<void>> _createTimeEntry(
-    String? project,
-    String? notes,
-    DateTime startedAt,
-    DateTime endedAt,
-  ) {
+  Future<Result<void>> _createTimeEntry() async {
     try {
-      return _timeEntriesRepository.saveEntry(
+      if (_startedAt == null || _endedAt == null) {
+        return Result.error(
+          ValidationError('Start and end time are required.'),
+        );
+      }
+      return await _timeEntriesRepository.saveEntry(
         profileId: _sessionManager.profileId!,
-        project: project?.trim(),
-        notes: notes?.trim(),
-        startedAt: startedAt,
-        endedAt: endedAt,
+        project: projectController.text.trim(),
+        notes: notesController.text.trim(),
+        startedAt: _startedAt!,
+        endedAt: _endedAt,
       );
     } finally {
       notifyListeners();
     }
   }
 
-  Future<Result<void>> _modifyTimeEntry(
-    String? project,
-    String? notes,
-    DateTime startedAt,
-    DateTime endedAt,
-  ) {
+  Future<Result<void>> _modifyTimeEntry() async {
     try {
-      return _timeEntriesRepository.modifyEntry(
+      if (_startedAt == null || _endedAt == null) {
+        return Result.error(
+          ValidationError('Start and end time are required.'),
+        );
+      }
+      return await _timeEntriesRepository.modifyEntry(
         entry: timeEntry!.copyWith(
-          project: Value(project?.trim()),
-          notes: Value(notes?.trim()),
-          startedAt: startedAt,
-          endedAt: Value(endedAt),
+          project: Value(projectController.text.trim()),
+          notes: Value(notesController.text.trim()),
+          startedAt: _startedAt,
+          endedAt: Value(_endedAt),
         ),
       );
     } finally {
@@ -101,6 +118,16 @@ class ControlEntriesViewModel extends ChangeNotifier {
 
   Future<void> _onSessionChanged() async {
     await load.execute();
+  }
+
+  void setStartedAt(DateTime? value) {
+    _startedAt = value;
+    notifyListeners();
+  }
+
+  void setEndedAt(DateTime? value) {
+    _endedAt = value;
+    notifyListeners();
   }
 
   @override

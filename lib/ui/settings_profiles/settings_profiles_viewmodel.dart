@@ -22,10 +22,9 @@ class SettingsProfilesViewModel extends ChangeNotifier {
 
   final int? _profileId;
   Profile? _profile;
-
+  bool _isDefaultProfile = false;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  bool _isDefaultProfile = false;
 
   late Command0<void> load;
   late Command0<void> createProfile;
@@ -97,5 +96,12 @@ class SettingsProfilesViewModel extends ChangeNotifier {
   void setIsDefault(bool value) {
     _isDefaultProfile = value;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    descriptionController.dispose();
+    super.dispose();
   }
 }

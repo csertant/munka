@@ -35,4 +35,12 @@ abstract final class AppDateUtils {
 
     return '$hours:$minutes';
   }
+
+  static DateTime firstPossibleDate() {
+    return DateTime(1998, 11, 11);
+  }
+
+  static DateTime lastPossibleDate() {
+    return DateTime.now().add(const Duration(days: 365));
+  }
 }

@@ -23,6 +23,8 @@ abstract class CustomIcons {
   static const stop = '$_basePath/stop.svg';
 
   static const list = '$_basePath/list.svg';
+  static const keyboard = '$_basePath/keyboard.svg';
+  static const clock = '$_basePath/clock.svg';
 
   static const user = '$_basePath/user.svg';
   static const userAdd = '$_basePath/user_add.svg';
@@ -108,15 +110,15 @@ class CustomIcon extends StatelessWidget {
   const CustomIcon({
     super.key,
     required this.iconPath,
-    this.size,
     this.color,
     this.padding,
+    this.size,
   });
 
   final String iconPath;
-  final double? size;
   final Color? color;
   final EdgeInsets? padding;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {

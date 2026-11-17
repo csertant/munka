@@ -6,14 +6,18 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     required this.controller,
-    this.labelText,
     this.errorText,
+    this.keyboardType,
+    this.labelText,
+    this.onTap,
     this.required = false,
   });
 
   final TextEditingController controller;
-  final String? labelText;
   final String? errorText;
+  final TextInputType? keyboardType;
+  final String? labelText;
+  final VoidCallback? onTap;
   final bool required;
 
   @override
@@ -28,6 +32,8 @@ class CustomTextField extends StatelessWidget {
                 ? null
                 : localizations.textFieldRequiredError
           : null,
+      keyboardType: keyboardType,
+      onTap: onTap,
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: theme.textTheme.bodyMedium!.copyWith(

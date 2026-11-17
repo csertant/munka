@@ -110,9 +110,7 @@ class _SettingsScreenState extends State<SettingsProfilesScreen> {
                         style: theme.textTheme.bodyMedium,
                       ),
                       value: widget.viewModel.isDefaultProfile,
-                      onChanged: (value) {
-                        widget.viewModel.setIsDefault(value);
-                      },
+                      onChanged: widget.viewModel.setIsDefault,
                     ),
                     const SizedBox(height: AppDimensions.paddingLarge),
                     OutlinedButton(
