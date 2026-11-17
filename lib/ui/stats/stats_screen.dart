@@ -44,7 +44,7 @@ class _StatsScreenState extends State<StatsScreen> {
           } else {
             return ErrorIndicator(
               title: localizations.statsLoadErrorTitle,
-              label: localizations.statsLoadErrorLabel,
+              label: localizations.buttonLabelReload,
               onPressed: widget.viewModel.load.execute,
             );
           }

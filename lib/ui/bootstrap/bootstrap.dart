@@ -48,7 +48,7 @@ class _BootstrapState extends State<Bootstrap> {
           final localizations = AppLocalizations.of(context)!;
           return ErrorIndicator(
             title: localizations.bootstrapLoadErrorTitle,
-            label: localizations.bootstrapLoadErrorLabel,
+            label: localizations.buttonLabelReload,
             onPressed: _bootstrapViewModel.load.execute,
           );
         } else {

@@ -56,7 +56,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           } else {
             return ErrorIndicator(
               title: localizations.settingsLoadErrorTitle,
-              label: localizations.settingsLoadErrorLabel,
+              label: localizations.buttonLabelReload,
               onPressed: widget.viewModel.load.execute,
             );
           }

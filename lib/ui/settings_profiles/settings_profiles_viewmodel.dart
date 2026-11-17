@@ -13,8 +13,8 @@ class SettingsProfilesViewModel extends ChangeNotifier {
     this._profileId,
   }) {
     load = Command0(_load);
-    createProfile = Command2(_createProfile);
-    modifyProfile = Command2(_modifyProfile);
+    createProfile = Command0(_createProfile);
+    modifyProfile = Command0(_modifyProfile);
 
     unawaited(load.execute());
   }
@@ -23,16 +23,24 @@ class SettingsProfilesViewModel extends ChangeNotifier {
   final int? _profileId;
   Profile? _profile;
 
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  bool _isDefaultProfile = false;
+
   late Command0<void> load;
-  late Command2<void, String, String?> createProfile;
-  late Command2<void, String, String?> modifyProfile;
+  late Command0<void> createProfile;
+  late Command0<void> modifyProfile;
 
   bool get isEditing => _profileId != null;
   Profile? get profile => _profile;
+  bool get isDefaultProfile => _isDefaultProfile;
 
   Future<Result<void>> _load() async {
     try {
       if (!isEditing) {
+        nameController.text = '';
+        descriptionController.text = '';
+        _isDefaultProfile = false;
         return const Result.ok(null);
       }
       final profileResult = await _profileRepository.getProfileById(
@@ -44,6 +52,9 @@ class SettingsProfilesViewModel extends ChangeNotifier {
           if (_profile == null) {
             return Result.error(NotFoundError('Profile not found.'));
           }
+          _isDefaultProfile = _profile!.isDefault;
+          nameController.text = _profile!.name;
+          descriptionController.text = _profile!.description ?? '';
           return const Result.ok(null);
         case Error<Profile>():
           return Result.error(profileResult.error);
@@ -53,27 +64,38 @@ class SettingsProfilesViewModel extends ChangeNotifier {
     }
   }
 
-  Future<Result<void>> _createProfile(String name, String? description) {
+  Future<Result<void>> _createProfile() async {
     try {
-      return _profileRepository.saveProfile(
-        name: name.trim(),
-        description: description?.trim(),
+      if (nameController.text.trim().isEmpty) {
+        return Result.error(ValidationError('Profile name is required.'));
+      }
+      return await _profileRepository.saveProfile(
+        name: nameController.text.trim(),
+        description: descriptionController.text.trim(),
       );
     } finally {
       notifyListeners();
     }
   }
 
-  Future<Result<void>> _modifyProfile(String name, String? description) {
+  Future<Result<void>> _modifyProfile() async {
     try {
-      return _profileRepository.modifyProfile(
+      if (nameController.text.trim().isEmpty) {
+        return Result.error(ValidationError('Profile name is required.'));
+      }
+      return await _profileRepository.modifyProfile(
         profile: profile!.copyWith(
-          name: name.trim(),
-          description: Value(description?.trim()),
+          name: nameController.text.trim(),
+          description: Value(descriptionController.text.trim()),
         ),
       );
     } finally {
       notifyListeners();
     }
+  }
+
+  void setIsDefault(bool value) {
+    _isDefaultProfile = value;
+    notifyListeners();
   }
 }

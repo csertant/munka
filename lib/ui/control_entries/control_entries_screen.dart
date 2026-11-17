@@ -33,7 +33,11 @@ class _ControlEntriesScreenState extends State<ControlEntriesScreen> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: CustomAppBar.text(text: localizations.controlEntriesScreenTitle),
+      appBar: CustomAppBar.text(
+        text: widget.viewModel.isEditing
+            ? localizations.controlEntriesEditScreenTitle
+            : localizations.controlEntriesNewScreenTitle,
+      ),
       body: ListenableBuilder(
         listenable: widget.viewModel.load,
         builder: (context, child) {
@@ -44,7 +48,7 @@ class _ControlEntriesScreenState extends State<ControlEntriesScreen> {
           } else {
             return ErrorIndicator(
               title: localizations.controlEntriesLoadErrorTitle,
-              label: localizations.controlEntriesLoadErrorLabel,
+              label: localizations.buttonLabelReload,
               onPressed: widget.viewModel.load.execute,
             );
           }

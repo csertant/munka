@@ -40,14 +40,14 @@ class ControlButtons extends StatelessWidget {
                 return CustomIconButton.normal(
                   iconPath: CustomIcons.play,
                   onTap: viewModel.startTracking.execute,
-                  tooltip: localizations.controlStartButtonLabel,
+                  tooltip: localizations.buttonLabelStart,
                   size: AppDimensions.iconSizeLarge,
                 );
               }
               return CustomIconButton.normal(
                 iconPath: CustomIcons.stop,
                 onTap: () => _handleStopPressed(context),
-                tooltip: localizations.controlStopButtonLabel,
+                tooltip: localizations.buttonLabelStop,
                 size: AppDimensions.iconSizeLarge,
               );
             },
@@ -55,7 +55,7 @@ class ControlButtons extends StatelessWidget {
           const SizedBox(width: AppDimensions.paddingMedium),
           CustomIconButton.redirectInApp(
             iconPath: CustomIcons.add,
-            tooltip: localizations.controlAddButtonLabel,
+            tooltip: localizations.buttonLabelAdd,
             route: Routes.controlEntriesNew,
             context: context,
           ),
@@ -78,7 +78,7 @@ class ControlButtons extends StatelessWidget {
 
     return AlertDialog(
       title: Text(
-        localizations.controlStopButtonLabel,
+        localizations.buttonLabelStop,
         style: Theme.of(context).textTheme.titleMedium,
       ),
       content: Column(
@@ -98,7 +98,7 @@ class ControlButtons extends StatelessWidget {
       actions: [
         CustomIconButton.normal(
           iconPath: CustomIcons.delete,
-          tooltip: localizations.controlClearButtonLabel,
+          tooltip: localizations.buttonLabelClear,
           onTap: () async {
             await viewModel.clearTracking.execute();
             if (context.mounted) {
@@ -113,7 +113,7 @@ class ControlButtons extends StatelessWidget {
               notes: notesController.text,
             ));
           },
-          child: Text(localizations.controlSaveButtonLabel),
+          child: Text(localizations.buttonLabelSave),
         ),
       ],
     );

@@ -32,7 +32,7 @@ class _ControlEntriesListScreenState extends State<ControlEntriesListScreen> {
           } else {
             return ErrorIndicator(
               title: localizations.controlEntriesListLoadErrorTitle,
-              label: localizations.controlEntriesListLoadErrorLabel,
+              label: localizations.buttonLabelReload,
               onPressed: widget.viewModel.load.execute,
             );
           }

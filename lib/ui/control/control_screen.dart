@@ -52,7 +52,7 @@ class _ControlScreenState extends State<ControlScreen> {
           } else {
             return ErrorIndicator(
               title: localizations.controlLoadErrorTitle,
-              label: localizations.controlLoadErrorLabel,
+              label: localizations.buttonLabelReload,
               onPressed: widget.viewModel.load.execute,
             );
           }

@@ -101,6 +101,40 @@ abstract final class AppTheme {
     }),
   );
 
+  static final SwitchThemeData _lightSwitchTheme = SwitchThemeData(
+    thumbColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
+        return AppColors.lightColorScheme.onPrimary;
+      } else {
+        return AppColors.lightColorScheme.outlineVariant;
+      }
+    }),
+    trackOutlineColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
+        return AppColors.lightColorScheme.onPrimary;
+      } else {
+        return AppColors.lightColorScheme.outlineVariant;
+      }
+    }),
+  );
+
+  static final SwitchThemeData _darkSwitchTheme = SwitchThemeData(
+    thumbColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
+        return AppColors.lightColorScheme.onPrimary;
+      } else {
+        return AppColors.lightColorScheme.outlineVariant;
+      }
+    }),
+    trackOutlineColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
+        return AppColors.lightColorScheme.onPrimary;
+      } else {
+        return AppColors.lightColorScheme.outlineVariant;
+      }
+    }),
+  );
+
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     colorScheme: AppColors.lightColorScheme,
@@ -114,6 +148,7 @@ abstract final class AppTheme {
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: _lightOutlinedButtonStyle,
     ),
+    switchTheme: _lightSwitchTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -129,5 +164,6 @@ abstract final class AppTheme {
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: _darkOutlinedButtonStyle,
     ),
+    switchTheme: _darkSwitchTheme,
   );
 }

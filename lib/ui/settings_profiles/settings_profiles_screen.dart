@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/generated/app_localizations.dart';
+import '../core/themes/dimensions.dart';
 import '../core/widgets/widgets.dart';
 import 'settings_profiles_viewmodel.dart';
 
@@ -39,9 +40,14 @@ class _SettingsScreenState extends State<SettingsProfilesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: CustomAppBar.text(text: localizations.settingsScreenTitle),
+      appBar: CustomAppBar.text(
+        text: widget.viewModel.isEditing
+            ? localizations.settingsProfilesEditScreenTitle
+            : localizations.settingsProfilesNewScreenTitle,
+      ),
       body: ListenableBuilder(
         listenable: widget.viewModel.load,
         builder: (context, child) {
@@ -52,7 +58,7 @@ class _SettingsScreenState extends State<SettingsProfilesScreen> {
           } else {
             return ErrorIndicator(
               title: localizations.settingsLoadErrorTitle,
-              label: localizations.settingsLoadErrorLabel,
+              label: localizations.buttonLabelReload,
               onPressed: widget.viewModel.load.execute,
             );
           }
@@ -60,7 +66,70 @@ class _SettingsScreenState extends State<SettingsProfilesScreen> {
         child: ListenableBuilder(
           listenable: widget.viewModel,
           builder: (context, child) {
-            return const Center(child: Text('Settings Profiles Screen'));
+            final isEditing = widget.viewModel.isEditing;
+            final profile = widget.viewModel.profile;
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+                child: Column(
+                  children: [
+                    const SizedBox(height: AppDimensions.paddingLarge),
+                    CustomCircleAvatar(
+                      iconPath: CustomIcons.fromName(
+                        isEditing ? profile!.name : '',
+                      ),
+                    ),
+                    const SizedBox(height: AppDimensions.paddingMedium),
+                    Text(
+                      isEditing ? '@${profile!.id}' : '@?',
+                      style: theme.textTheme.bodyMedium!.copyWith(
+                        color: theme.colorScheme.onTertiary,
+                      ),
+                    ),
+                    const SizedBox(height: AppDimensions.paddingSmall),
+                    CustomTextField(
+                      controller: widget.viewModel.nameController,
+                      labelText: localizations.settingsProfileName,
+                      required: true,
+                    ),
+                    const SizedBox(height: AppDimensions.paddingSmall),
+                    CustomTextField(
+                      controller: widget.viewModel.descriptionController,
+                      labelText: localizations.settingsProfileDescription,
+                    ),
+                    const SizedBox(height: AppDimensions.paddingSmall),
+                    SwitchListTile(
+                      contentPadding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          AppDimensions.borderRadiusMedium,
+                        ),
+                      ),
+                      title: Text(
+                        localizations.settingsProfileIsDefault,
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                      value: widget.viewModel.isDefaultProfile,
+                      onChanged: (value) {
+                        widget.viewModel.setIsDefault(value);
+                      },
+                    ),
+                    const SizedBox(height: AppDimensions.paddingLarge),
+                    OutlinedButton(
+                      onPressed: isEditing
+                          ? () => widget.viewModel.modifyProfile.execute()
+                          : () async {
+                              await widget.viewModel.createProfile.execute();
+                              if (context.mounted && !isEditing) {
+                                Navigator.of(context).pop();
+                              }
+                            },
+                      child: Text(localizations.buttonLabelSave),
+                    ),
+                  ],
+                ),
+              ),
+            );
           },
         ),
       ),
