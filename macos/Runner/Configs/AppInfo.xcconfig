@@ -8,7 +8,7 @@
 PRODUCT_NAME = munka
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = hu.munkaapp.flutterMvvmTemplate
+PRODUCT_BUNDLE_IDENTIFIER = hu.munkaapp.munka
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2026 hu.munkaapp. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2026 nosebite studios. All rights reserved.
