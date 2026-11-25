@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/generated/app_localizations.dart';
+import '../core/themes/dimensions.dart';
 import '../core/widgets/widgets.dart';
 import 'control_viewmodel.dart';
 import 'widgets/control_buttons.dart';
@@ -17,21 +18,6 @@ class ControlScreen extends StatefulWidget {
 }
 
 class _ControlScreenState extends State<ControlScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void didUpdateWidget(covariant ControlScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -60,16 +46,18 @@ class _ControlScreenState extends State<ControlScreen> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final availableHeight = constraints.maxHeight;
-            final initialTopHeight = availableHeight * 0.90;
-            final collapsedTopHeight = availableHeight * 0.50;
             return CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
                 SliverPersistentHeader(
                   pinned: true,
                   delegate: CustomSliverPersistentHeaderDelegate(
-                    minHeight: collapsedTopHeight,
-                    maxHeight: initialTopHeight,
+                    minHeight: AppDimensions.sliverCollapsedTopHeight(
+                      availableHeight,
+                    ),
+                    maxHeight: AppDimensions.sliverInitialTopHeight(
+                      availableHeight,
+                    ),
                     children: [
                       ControlTimer(viewModel: widget.viewModel),
                       ControlButtons(viewModel: widget.viewModel),

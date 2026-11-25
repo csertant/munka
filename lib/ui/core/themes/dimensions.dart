@@ -42,10 +42,16 @@ abstract final class AppDimensions {
   static const chartLeftTitlesSize = 36.0;
   static const chartBottomTitlesSize = 28.0;
   static const chartBarWidth = 24.0;
-  static const chartBarWidthSingleColumn = 56.0;
+  static const chartBarWidthThreeColumns = 36.0;
+  static const chartBarWidthSingleColumn = 58.0;
 
   double get iconSizeDefault;
   double get avatarSizeDefault;
+
+  static double sliverInitialTopHeight(double availableHeight) =>
+      availableHeight * 0.90;
+  static double sliverCollapsedTopHeight(double availableHeight) =>
+      availableHeight * 0.50;
 
   static const AppDimensions mobile = _AppDimensionsMobile();
   static const AppDimensions tablet = _AppDimensionsTablet();

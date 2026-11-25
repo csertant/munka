@@ -16,6 +16,8 @@ import '../ui/settings/settings_screen.dart';
 import '../ui/settings/settings_viewmodel.dart';
 import '../ui/settings_profiles/settings_profiles_screen.dart';
 import '../ui/settings_profiles/settings_profiles_viewmodel.dart';
+import '../ui/share/share_screen.dart';
+import '../ui/share/share_viewmodel.dart';
 import '../ui/stats/stats_screen.dart';
 import '../ui/stats/stats_viewmodel.dart';
 import 'routes.dart';
@@ -88,6 +90,16 @@ GoRouter router() => GoRouter(
                       sessionManager: context.read<SessionManager>(),
                     );
                     return ControlEntriesListScreen(viewModel: viewModel);
+                  },
+                ),
+                GoRoute(
+                  path: Routes.share,
+                  builder: (context, state) {
+                    final viewModel = ShareViewModel(
+                      timeEntriesRepository: context
+                          .read<TimeEntriesRepository>(),
+                    );
+                    return ShareScreen(viewModel: viewModel);
                   },
                 ),
               ],

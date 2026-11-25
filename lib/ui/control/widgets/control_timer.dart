@@ -31,7 +31,7 @@ class ControlTimer extends StatelessWidget {
                   viewModel.isTracking.value
                       ? AppDateUtils.formatElapsedTime(viewModel.elapsed)
                       : AppDateFormat.HHmm.format(viewModel.currentTime),
-                  style: theme.textTheme.headlineLarge,
+                  style: theme.textTheme.displayLarge,
                 ),
                 Text(
                   AppDateFormat.yMMdd.format(viewModel.currentTime),

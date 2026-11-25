@@ -13,13 +13,13 @@ var _baseTextStyle = const TextStyle(
 
 abstract final class AppTheme {
   static final _textTheme = TextTheme(
+    displayLarge: _baseTextStyle.copyWith(fontSize: 75),
     // Currently unused
-    displayLarge: _baseTextStyle.copyWith(color: Colors.deepPurple),
     displayMedium: _baseTextStyle.copyWith(color: Colors.deepPurple),
     displaySmall: _baseTextStyle.copyWith(color: Colors.deepPurple),
 
     //Currently unused
-    headlineLarge: _baseTextStyle.copyWith(fontSize: 75),
+    headlineLarge: _baseTextStyle.copyWith(color: Colors.deepPurple),
     headlineMedium: _baseTextStyle.copyWith(color: Colors.deepPurple),
     headlineSmall: _baseTextStyle.copyWith(color: Colors.deepPurple),
 

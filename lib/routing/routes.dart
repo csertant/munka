@@ -14,5 +14,6 @@ abstract final class Routes {
   static String settingsProfileEdit(String id) =>
       '$settings/${settingsProfileEditSegment(id)}';
   static String settingsProfileEditSegment(String id) => 'profile/edit/$id';
+  static const share = '/share';
   static const stats = '/stats';
 }
