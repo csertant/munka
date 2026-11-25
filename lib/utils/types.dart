@@ -4,3 +4,5 @@ typedef Id = int;
 
 typedef CacheKey = String;
 typedef CacheValue = Object;
+
+typedef DateTimeRange = ({DateTime start, DateTime end});

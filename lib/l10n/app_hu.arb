@@ -65,6 +65,8 @@
     "settingsMetadataLegalNotice": "© 2026 nosebite studios. Minden jog fenntartva!",
     "statsScreenTitle": "Statisztika",
     "statsLoadErrorTitle": "Hiba történt a statisztikák betöltésekor.",
+    "statsGoForwardButtonLabel": "Előre",
+    "statsGoBackwardButtonLabel": "Vissza",
     "buttonLabelOk": "Ok",
     "buttonLabelReload": "Újratöltés",
     "buttonLabelClear": "Törlés",
@@ -72,5 +74,11 @@
     "buttonLabelStart": "Indítás",
     "buttonLabelStop": "Leállítás",
     "buttonLabelAdd": "Hozzáadás",
-    "textFieldRequiredError": "Ez a mező kötelező."
+    "buttonLabelDay": "Nap",
+    "buttonLabelWeek": "Hét",
+    "buttonLabelMonth": "Hónap",
+    "buttonLabelYear": "Év",
+    "textFieldRequiredError": "Ez a mező kötelező.",
+    "datetimeToday": "Ma",
+    "datetimeYesterday": "Tegnap"
 }

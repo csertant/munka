@@ -11,4 +11,4 @@ PRODUCT_NAME = munka
 PRODUCT_BUNDLE_IDENTIFIER = hu.munkaapp.munka
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2026 nosebite studios. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2026 tamas.csertan. All rights reserved.

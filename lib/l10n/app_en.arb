@@ -65,6 +65,8 @@
     "settingsMetadataLegalNotice": "© 2026 nosebite studios. All rights reserved!",
     "statsScreenTitle": "Stats",
     "statsLoadErrorTitle": "An error occurred while loading the stats screen.",
+    "statsGoForwardButtonLabel": "Go forward",
+    "statsGoBackwardButtonLabel": "Go backward",
     "buttonLabelOk": "Ok",
     "buttonLabelReload": "Reload",
     "buttonLabelClear": "Clear",
@@ -72,5 +74,11 @@
     "buttonLabelStart": "Start",
     "buttonLabelStop": "Stop",
     "buttonLabelAdd": "Add",
-    "textFieldRequiredError": "This field is required."
+    "buttonLabelDay": "Day",
+    "buttonLabelWeek": "Week",
+    "buttonLabelMonth": "Month",
+    "buttonLabelYear": "Year",
+    "textFieldRequiredError": "This field is required.",
+    "datetimeToday": "Today",
+    "datetimeYesterday": "Yesterday"
 }

@@ -1,8 +1,12 @@
 import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/generated/app_localizations.dart';
+import '../core/themes/dimensions.dart';
 import '../core/widgets/widgets.dart';
 import 'stats_viewmodel.dart';
+import 'widgets/stats_chart.dart';
+import 'widgets/stats_granularity_button.dart';
+import 'widgets/stats_summary.dart';
 
 class StatsScreen extends StatefulWidget {
   const StatsScreen({super.key, required this.viewModel});
@@ -14,21 +18,6 @@ class StatsScreen extends StatefulWidget {
 }
 
 class _StatsScreenState extends State<StatsScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void didUpdateWidget(covariant StatsScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -49,10 +38,36 @@ class _StatsScreenState extends State<StatsScreen> {
             );
           }
         },
-        child: ListenableBuilder(
-          listenable: widget.viewModel,
+        child: AnimatedBuilder(
+          animation: widget.viewModel,
           builder: (context, child) {
-            return const Center(child: Text('Stats Screen Content'));
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                StatsSummary(
+                  title: widget.viewModel.summaryTitle,
+                  totalHours: widget.viewModel.totalHours,
+                  stepBackward: widget.viewModel.stepBackward,
+                  stepForward: widget.viewModel.stepForward,
+                  canGoForward: widget.viewModel.canGoForward,
+                ),
+                const SizedBox(height: AppDimensions.paddingMedium),
+                Expanded(
+                  child: StatsChart(
+                    buckets: widget.viewModel.buckets,
+                    stepBackward: widget.viewModel.stepBackward,
+                    stepForward: widget.viewModel.stepForward,
+                    granularity: widget.viewModel.granularity,
+                    maxHours: widget.viewModel.maxHours,
+                  ),
+                ),
+                const SizedBox(height: AppDimensions.paddingMedium),
+                StatsGranularityButton(
+                  granularity: widget.viewModel.granularity,
+                  onGranularityChanged: widget.viewModel.setGranularity,
+                ),
+              ],
+            );
           },
         ),
       ),

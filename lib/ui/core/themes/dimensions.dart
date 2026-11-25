@@ -39,6 +39,11 @@ abstract final class AppDimensions {
 
   static const borderWidth = 1.0;
 
+  static const chartLeftTitlesSize = 36.0;
+  static const chartBottomTitlesSize = 28.0;
+  static const chartBarWidth = 24.0;
+  static const chartBarWidthSingleColumn = 56.0;
+
   double get iconSizeDefault;
   double get avatarSizeDefault;
 

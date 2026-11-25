@@ -24,10 +24,15 @@ abstract class CustomIcons {
 
   static const list = '$_basePath/list.svg';
   static const share = '$_basePath/share.svg';
+  static const check = '$_basePath/check.svg';
 
   static const day = '$_basePath/day.svg';
   static const week = '$_basePath/week.svg';
   static const month = '$_basePath/month.svg';
+  static const year = '$_basePath/year.svg';
+
+  static const left = '$_basePath/left.svg';
+  static const right = '$_basePath/right.svg';
 
   static const user = '$_basePath/user.svg';
   static const userAdd = '$_basePath/user_add.svg';
