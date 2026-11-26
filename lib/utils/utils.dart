@@ -3,4 +3,5 @@ export 'datetime.dart';
 export 'exceptions.dart';
 export 'guard.dart';
 export 'result.dart';
+export 'share.dart';
 export 'types.dart';
