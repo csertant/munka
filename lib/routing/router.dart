@@ -98,6 +98,7 @@ GoRouter router() => GoRouter(
                     final viewModel = ShareViewModel(
                       timeEntriesRepository: context
                           .read<TimeEntriesRepository>(),
+                      sessionManager: context.read<SessionManager>(),
                     );
                     return ShareScreen(viewModel: viewModel);
                   },

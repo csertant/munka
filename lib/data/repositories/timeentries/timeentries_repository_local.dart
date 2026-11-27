@@ -2,13 +2,18 @@ import 'package:drift/drift.dart';
 
 import '../../../utils/utils.dart';
 import '../../database/database.dart';
+import '../../services/csv_service/csv_service.dart';
 import '../../services/database_service/database_service.dart';
 import 'timeentries_repository.dart';
 
 class TimeEntriesRepositoryLocal extends TimeEntriesRepository {
-  TimeEntriesRepositoryLocal({required this._databaseService});
+  TimeEntriesRepositoryLocal({
+    required this._databaseService,
+    required this._csvService,
+  });
 
   final DatabaseService _databaseService;
+  final CsvService _csvService;
 
   @override
   Future<Result<TimeEntry?>> getActiveEntry({required Id profileId}) {
@@ -75,5 +80,17 @@ class TimeEntriesRepositoryLocal extends TimeEntriesRepository {
   @override
   Future<Result<void>> removeEntry({required Id entryId}) {
     return _databaseService.removeEntry(timeEntryId: entryId);
+  }
+
+  @override
+  Future<Result<void>> clearTemporaryCsvFiles() {
+    return _csvService.clearTemporaryCsvFiles();
+  }
+
+  @override
+  Future<Result<void>> exportTimeEntriesToCsv({
+    required List<TimeEntry> timeEntries,
+  }) {
+    return _csvService.exportTimeEntriesToCsv(timeEntries: timeEntries);
   }
 }

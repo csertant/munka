@@ -11,6 +11,7 @@ import '../data/repositories/settings/settings_repository.dart';
 import '../data/repositories/settings/settings_repository_local.dart';
 import '../data/repositories/timeentries/timeentries_repository.dart';
 import '../data/repositories/timeentries/timeentries_repository_local.dart';
+import '../data/services/csv_service/csv_service.dart';
 import '../data/services/database_service/database_service.dart';
 import '../data/services/database_service/database_service_dev.dart';
 import '../data/services/database_service/database_service_prod.dart';
@@ -18,6 +19,7 @@ import '../data/services/shared_preferences_service/shared_preferences_service.d
 
 List<SingleChildWidget> _sharedProviders = [
   Provider(create: (context) => SharedPreferencesService()),
+  Provider(create: (context) => CsvService()),
   ChangeNotifierProvider(
     create: (context) => SettingsRepositoryLocal(
       sharedPreferencesService: context.read<SharedPreferencesService>(),
@@ -31,6 +33,7 @@ List<SingleChildWidget> _sharedProviders = [
   Provider(
     create: (context) => TimeEntriesRepositoryLocal(
       databaseService: context.read<DatabaseService>(),
+      csvService: context.read<CsvService>(),
     ) as TimeEntriesRepository,
   ),
 ];

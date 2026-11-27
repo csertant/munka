@@ -63,6 +63,8 @@
         }
     },
     "settingsMetadataLegalNotice": "© 2026 nosebite studios. Minden jog fenntartva!",
+    "shareScreenTitle": "Megosztás",
+    "shareLoadErrorTitle": "Hiba történt a megosztás képernyő betöltésekor.",
     "statsScreenTitle": "Statisztika",
     "statsLoadErrorTitle": "Hiba történt a statisztikák betöltésekor.",
     "statsGoForwardButtonLabel": "Előre",

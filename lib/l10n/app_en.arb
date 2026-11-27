@@ -63,6 +63,8 @@
         }
     },
     "settingsMetadataLegalNotice": "© 2026 nosebite studios. All rights reserved!",
+    "shareScreenTitle": "Share",
+    "shareLoadErrorTitle": "An error occurred while loading the share screen.",
     "statsScreenTitle": "Stats",
     "statsLoadErrorTitle": "An error occurred while loading the stats screen.",
     "statsGoForwardButtonLabel": "Go forward",

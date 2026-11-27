@@ -21,4 +21,9 @@ abstract class TimeEntriesRepository {
   });
   Future<Result<void>> modifyEntry({required TimeEntry entry});
   Future<Result<void>> removeEntry({required Id entryId});
+
+  Future<Result<void>> clearTemporaryCsvFiles();
+  Future<Result<void>> exportTimeEntriesToCsv({
+    required List<TimeEntry> timeEntries,
+  });
 }
