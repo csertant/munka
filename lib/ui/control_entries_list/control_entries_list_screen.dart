@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../core/widgets/widgets.dart';
 import 'control_entries_list_viewmodel.dart';
+import 'widgets/control_entries_list_header.dart';
 
 class ControlEntriesListScreen extends StatefulWidget {
   const ControlEntriesListScreen({super.key, required this.viewModel});
@@ -40,10 +41,25 @@ class _ControlEntriesListScreenState extends State<ControlEntriesListScreen> {
         child: ListenableBuilder(
           listenable: widget.viewModel,
           builder: (context, child) {
-            return ListView.builder(
-              itemCount: widget.viewModel.timeEntries.length,
-              itemBuilder: (context, index) =>
-                  TimeEntryTile(timeEntry: widget.viewModel.timeEntries[index]),
+            return Column(
+              children: [
+                const ControlEntriesListHeader(),
+                if (widget.viewModel.timeEntries.isEmpty)
+                  Expanded(
+                    child: Center(
+                      child: Text(localizations.controlNoEntriesLabel),
+                    ),
+                  )
+                else
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: widget.viewModel.timeEntries.length,
+                      itemBuilder: (context, index) => TimeEntryTile(
+                        timeEntry: widget.viewModel.timeEntries[index],
+                      ),
+                    ),
+                  ),
+              ],
             );
           },
         ),

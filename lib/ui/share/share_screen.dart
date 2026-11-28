@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/generated/app_localizations.dart';
+import '../core/themes/dimensions.dart';
 import '../core/widgets/widgets.dart';
 import 'share_viewmodel.dart';
 
@@ -14,6 +15,33 @@ class ShareScreen extends StatefulWidget {
 }
 
 class _ShareScreenState extends State<ShareScreen> {
+  @override
+  void initState() {
+    super.initState();
+    widget.viewModel.exportTimeEntriesToCsv.addListener(
+      _onExportTimeEntriesToCsvResult,
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant ShareScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    oldWidget.viewModel.exportTimeEntriesToCsv.removeListener(
+      _onExportTimeEntriesToCsvResult,
+    );
+    widget.viewModel.exportTimeEntriesToCsv.addListener(
+      _onExportTimeEntriesToCsvResult,
+    );
+  }
+
+  @override
+  void dispose() {
+    widget.viewModel.exportTimeEntriesToCsv.removeListener(
+      _onExportTimeEntriesToCsvResult,
+    );
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -37,10 +65,45 @@ class _ShareScreenState extends State<ShareScreen> {
         child: ListenableBuilder(
           listenable: widget.viewModel,
           builder: (context, child) {
-            return const SingleChildScrollView();
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const CustomIcon(
+                      iconPath: CustomIcons.share,
+                      size: AppDimensions.iconSizeLarge,
+                    ),
+                    const SizedBox(height: AppDimensions.paddingLarge),
+                    Text(
+                      localizations.shareDetails,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: AppDimensions.paddingLarge),
+                    OutlinedButton(
+                      onPressed:
+                          widget.viewModel.exportTimeEntriesToCsv.execute,
+                      child: Text(localizations.buttonLabelShare),
+                    ),
+                  ],
+                ),
+              ),
+            );
           },
         ),
       ),
+    );
+  }
+
+  void _onExportTimeEntriesToCsvResult() {
+    final localizations = AppLocalizations.of(context)!;
+    showFeedbackOnResult(
+      context: context,
+      action: widget.viewModel.exportTimeEntriesToCsv,
+      successMessage: localizations.shareTimeEntriesExported,
+      errorMessage: localizations.errorWhileExportingTimeEntries,
     );
   }
 }

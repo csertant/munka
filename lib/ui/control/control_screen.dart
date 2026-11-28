@@ -6,6 +6,7 @@ import '../core/widgets/widgets.dart';
 import 'control_viewmodel.dart';
 import 'widgets/control_buttons.dart';
 import 'widgets/control_recent_entries.dart';
+import 'widgets/control_recent_entries_header.dart';
 import 'widgets/control_timer.dart';
 
 class ControlScreen extends StatefulWidget {
@@ -64,6 +65,7 @@ class _ControlScreenState extends State<ControlScreen> {
                     ],
                   ),
                 ),
+                const ControlRecentEntriesHeader(),
                 ControlRecentEntries(viewModel: widget.viewModel),
               ],
             );

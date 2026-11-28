@@ -93,7 +93,7 @@ GoRouter router() => GoRouter(
                   },
                 ),
                 GoRoute(
-                  path: Routes.share,
+                  path: Routes.controlEntriesShareSegment,
                   builder: (context, state) {
                     final viewModel = ShareViewModel(
                       timeEntriesRepository: context

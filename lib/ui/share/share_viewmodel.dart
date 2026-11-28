@@ -13,6 +13,7 @@ class ShareViewModel extends ChangeNotifier {
     required this._sessionManager,
   }) {
     load = Command0(_load);
+    exportTimeEntriesToCsv = Command0(_exportTimeEntriesToCsv);
 
     _sessionManager.addListener(_onSessionChanged);
     _timeEntriesSubscription = _timeEntriesRepository
@@ -32,6 +33,7 @@ class ShareViewModel extends ChangeNotifier {
   List<TimeEntry> _timeEntries = [];
 
   late Command0<void> load;
+  late Command0<void> exportTimeEntriesToCsv;
 
   List<TimeEntry> get timeEntries => _timeEntries;
 
@@ -56,7 +58,7 @@ class ShareViewModel extends ChangeNotifier {
     }
   }
 
-  Future<Result<void>> exportTimeEntriesToCsv() async {
+  Future<Result<void>> _exportTimeEntriesToCsv() async {
     try {
       final exportResult = await _timeEntriesRepository.exportTimeEntriesToCsv(
         timeEntries: _timeEntries,
